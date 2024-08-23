@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://vqaganx7yfqw"]
+
+[ext_resource type="Texture2D" uid="uid://c0prmybt0corq" path="res://Assets/TileSet.png" id="1_8ahxj"]
+[ext_resource type="Script" path="res://Buildings/House.gd" id="1_lp038"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obqs3"]
+atlas = ExtResource("1_8ahxj")
+region = Rect2(80, 416, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvdc0"]
+size = Vector2(16, 16)
+
+[node name="House" type="StaticBody2D" groups=["Accommodation"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_lp038")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_obqs3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yvdc0")

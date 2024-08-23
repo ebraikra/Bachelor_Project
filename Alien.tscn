@@ -1,0 +1,87 @@
+[gd_scene load_steps=19 format=3 uid="uid://difpm22axvugw"]
+
+[ext_resource type="Script" path="res://Alien.gd" id="1_hp8b3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_koa4g"]
+[ext_resource type="Texture2D" uid="uid://bmicuuj4diqj4" path="res://Assets/FarmerRed.png" id="2_s8x5q"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_0beh5"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_v30p3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="5_gcotf"]
+[ext_resource type="Script" path="res://AI/Conditions/HasAHomeCondition.gd" id="5_jxsob"]
+[ext_resource type="Script" path="res://AI/Conditions/HasToSleepCondition.gd" id="6_culqa"]
+[ext_resource type="Script" path="res://AI/Conditions/HasBeenSendToHomeCondition.gd" id="7_a6gse"]
+[ext_resource type="Script" path="res://AI/Conditions/IsAtHomeCondition.gd" id="7_ilnew"]
+[ext_resource type="Script" path="res://AI/Actions/WalkToHomeAction.gd" id="8_p5pv4"]
+[ext_resource type="Script" path="res://AI/Conditions/HasAJobCondition.gd" id="10_3uyl2"]
+[ext_resource type="Script" path="res://AI/Conditions/HasToWorkCondition.gd" id="11_1c2df"]
+[ext_resource type="Script" path="res://AI/Conditions/HasBeenSendToWorkCondition.gd" id="12_553w5"]
+[ext_resource type="Script" path="res://AI/Actions/WalkToWorkAction.gd" id="12_nwudr"]
+[ext_resource type="Script" path="res://AI/Conditions/IsAtWorkCondition.gd" id="15_5ss56"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4rqo"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0unr"]
+atlas = ExtResource("2_s8x5q")
+region = Rect2(3, 2, 10, 12)
+
+[node name="Alien" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_hp8b3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e4rqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_c0unr")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("2_koa4g")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@17610")
+actor = NodePath("..")
+
+[node name="PlaceSelector" type="Node" parent="BeehaveTree"]
+script = ExtResource("4_v30p3")
+
+[node name="GoToHome" type="Node" parent="BeehaveTree/PlaceSelector"]
+script = ExtResource("3_0beh5")
+
+[node name="HasToSleepCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToHome"]
+script = ExtResource("6_culqa")
+
+[node name="HasBeenSendToHomeCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToHome"]
+script = ExtResource("7_a6gse")
+
+[node name="HasAHomeCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToHome"]
+script = ExtResource("5_jxsob")
+
+[node name="InverterDecorator" type="Node" parent="BeehaveTree/PlaceSelector/GoToHome"]
+script = ExtResource("5_gcotf")
+
+[node name="IsAtHomeCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToHome/InverterDecorator"]
+script = ExtResource("7_ilnew")
+
+[node name="WalkToHomeAction" type="Node" parent="BeehaveTree/PlaceSelector/GoToHome"]
+script = ExtResource("8_p5pv4")
+
+[node name="GoToWork" type="Node" parent="BeehaveTree/PlaceSelector"]
+script = ExtResource("3_0beh5")
+
+[node name="HasToWorkCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToWork"]
+script = ExtResource("11_1c2df")
+
+[node name="HasBeenSendToWorkCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToWork"]
+script = ExtResource("12_553w5")
+
+[node name="HasAJobCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToWork"]
+script = ExtResource("10_3uyl2")
+
+[node name="InverterDecorator" type="Node" parent="BeehaveTree/PlaceSelector/GoToWork"]
+script = ExtResource("5_gcotf")
+
+[node name="IsAtWorkCondition" type="Node" parent="BeehaveTree/PlaceSelector/GoToWork/InverterDecorator"]
+script = ExtResource("15_5ss56")
+
+[node name="WalkToWorkAction" type="Node" parent="BeehaveTree/PlaceSelector/GoToWork"]
+script = ExtResource("12_nwudr")

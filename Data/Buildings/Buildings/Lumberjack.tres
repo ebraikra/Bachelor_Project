@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="WorkplaceData" load_steps=5 format=3 uid="uid://dxhvbjivw87ns"]
+
+[ext_resource type="PackedScene" uid="uid://cleb3p0gy6w0m" path="res://Buildings/Lumberjack.tscn" id="1_32w3v"]
+[ext_resource type="Script" path="res://Data/Buildings/WorkplaceData.gd" id="1_ytjn7"]
+[ext_resource type="Texture2D" uid="uid://c0prmybt0corq" path="res://Assets/TileSet.png" id="3_7lxs5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40l6p"]
+atlas = ExtResource("3_7lxs5")
+region = Rect2(144, 416, 16, 16)
+
+[resource]
+resource_name = "Lumberjack"
+script = ExtResource("1_ytjn7")
+neededWorkers = 2
+produces = {
+0: 0,
+1: 0,
+2: 15
+}
+name = "Holzfäller"
+texture = SubResource("AtlasTexture_40l6p")
+description = ""
+buildingNode = ExtResource("1_32w3v")
+buildingCategory = 2
+buildingCost = 2
+energyCost = 6
+co2 = 15.0

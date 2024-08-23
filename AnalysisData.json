@@ -1,0 +1,8 @@
+{
+	"TREE_NOT_SPAWNING": {
+		"TEXT": "Es sieht so aus, dass keine neuen Bäume mehr wachsen. Scheinbar hat der CO2 Ausstoß unserer Fabriken Auswirkungen darauf."
+	},
+	"CLOUDS_SPAWNING": {
+		"TEXT": "Graue Wolken erscheinen am Himmel. Eventuell hat der Ausstoß unserer Fabriken etwas damit zu tun. Wir sollten das im Auge behalten."
+	}
+}

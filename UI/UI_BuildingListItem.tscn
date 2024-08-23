@@ -1,0 +1,245 @@
+[gd_scene load_steps=11 format=3 uid="uid://btyb0247uvshu"]
+
+[ext_resource type="Texture2D" uid="uid://3bvcfa2exsjx" path="res://Assets/inventory_chopped.png" id="1_ii4cl"]
+[ext_resource type="Script" path="res://UI/UI_BuildingListItem.gd" id="2_kjbpf"]
+[ext_resource type="Texture2D" uid="uid://bb1s5fh1pc74j" path="res://Assets/red-exclamation-mark-triangle-shape-with-pixel-art-style_475147-718-removebg-preview.png" id="3_rnt5c"]
+[ext_resource type="Texture2D" uid="uid://dhukhgaxj47up" path="res://Assets/energy.png" id="4_id8x7"]
+[ext_resource type="Texture2D" uid="uid://dtxrltywqle43" path="res://Assets/chickenleg.png" id="5_4lox7"]
+[ext_resource type="Texture2D" uid="uid://b7t75ug6c1201" path="res://Assets/wood.png" id="6_ea0tk"]
+[ext_resource type="Texture2D" uid="uid://bmicuuj4diqj4" path="res://Assets/FarmerRed.png" id="7_agyfy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8deti"]
+atlas = ExtResource("1_ii4cl")
+region = Rect2(6, 149, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lodux"]
+atlas = ExtResource("1_ii4cl")
+region = Rect2(6, 120, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbdq4"]
+atlas = ExtResource("7_agyfy")
+region = Rect2(0, 0, 16, 16)
+
+[node name="UI_BuildingListItem" type="TextureButton"]
+custom_minimum_size = Vector2(90, 90)
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_8deti")
+texture_hover = SubResource("AtlasTexture_lodux")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_kjbpf")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+
+[node name="WarnIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_rnt5c")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 202.0
+offset_bottom = -5.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="Panel/MarginContainer"]
+layout_mode = 2
+text = "Nicht genügend Holz vorhanden!"
+
+[node name="Stats" type="Panel" parent="."]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 335.0
+offset_top = 865.0
+offset_right = 660.0
+offset_bottom = 1079.0
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+
+[node name="HSeparator" type="HSeparator" parent="Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Desc" type="RichTextLabel" parent="Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Description"
+fit_content = true
+
+[node name="Sep" type="HSeparator" parent="Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+split_offset = 150
+dragger_visibility = 1
+
+[node name="produce_con" type="VBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con"]
+layout_mode = 2
+text = "Produziert:"
+
+[node name="EnergyContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con/EnergyContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con/EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("4_id8x7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="FoodContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con/FoodContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con/FoodContainer"]
+layout_mode = 2
+texture = ExtResource("5_4lox7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="WoodContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con/WoodContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/produce_con/WoodContainer"]
+layout_mode = 2
+texture = ExtResource("6_ea0tk")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="consumes_con" type="VBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con"]
+layout_mode = 2
+text = "Verbraucht:"
+
+[node name="EnergyContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("4_id8x7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/EnergyContainer"]
+layout_mode = 2
+
+[node name="FoodContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/FoodContainer"]
+layout_mode = 2
+texture = ExtResource("5_4lox7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/FoodContainer"]
+layout_mode = 2
+
+[node name="WoodContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/WoodContainer"]
+layout_mode = 2
+texture = ExtResource("6_ea0tk")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/WoodContainer"]
+layout_mode = 2
+
+[node name="AlienContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/AlienContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_bbdq4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/HSplitContainer/consumes_con/AlienContainer"]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

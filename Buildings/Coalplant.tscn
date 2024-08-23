@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://s53b0c1cc2ns"]
+
+[ext_resource type="Script" path="res://Buildings/Lumberjack.gd" id="1_t6ehe"]
+[ext_resource type="Texture2D" uid="uid://c0prmybt0corq" path="res://Assets/TileSet.png" id="2_s1bpf"]
+[ext_resource type="Texture2D" uid="uid://cjp4gslmona38" path="res://Assets/SmokeAndFire.png" id="4_bc4bn"]
+[ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="4_sjx87"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
+size = Vector2(16, 16)
+
+[sub_resource type="TileSet" id="TileSet_p1ewo"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk1qj"]
+atlas = ExtResource("4_bc4bn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uaur"]
+atlas = ExtResource("4_bc4bn")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cwm3"]
+atlas = ExtResource("4_bc4bn")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v45h1"]
+atlas = ExtResource("4_bc4bn")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp4ne"]
+atlas = ExtResource("4_bc4bn")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbkjw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk1qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uaur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cwm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v45h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp4ne")
+}],
+"loop": true,
+"name": &"SmokeActive",
+"speed": 8.0
+}]
+
+[node name="Coalplant" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+script = ExtResource("1_t6ehe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jhlbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s1bpf")
+region_enabled = true
+region_rect = Rect2(112, 464, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-48, 16, -48, -16, -32, -16, -32, -32, -16, -32, -16, -48, 16, -48, 16, -32, 32, -32, 32, -16, 48, -16, 48, 16, 32, 16, 32, 32, 16, 32, 16, 48, -16, 48, -16, 32, -32, 32, -32, 16)
+
+[node name="Tiles" type="TileMap" parent="."]
+visible = false
+position = Vector2(8, 8)
+tile_set = SubResource("TileSet_p1ewo")
+format = 2
+layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 0, 0, -65537, 0, 0, -65538, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, -196610, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -262144, 0, 0, -196609, 0, 0, 131070, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 65536, 0, 0, 131071, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, -131075, 0, 0, -196607, 0, 0, 65537, 0, 0, 131069, 0, 0)
+
+[node name="Chimney" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1.88125, -5.13794)
+scale = Vector2(1.38984, 1.61446)
+sprite_frames = SubResource("SpriteFrames_pbkjw")
+animation = &"SmokeActive"
+autoplay = "SmokeActive"
+frame_progress = 0.427517
+
+[node name="InActiveWarning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.08525, 0.08525)
+texture = ExtResource("4_sjx87")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

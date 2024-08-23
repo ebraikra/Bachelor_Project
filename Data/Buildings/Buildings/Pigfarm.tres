@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="WorkplaceData" load_steps=5 format=3 uid="uid://bhh0fw5pntch2"]
+
+[ext_resource type="PackedScene" uid="uid://bb5u0c8dvehs" path="res://Buildings/Pigfarm.tscn" id="1_pvcnn"]
+[ext_resource type="Script" path="res://Data/Buildings/WorkplaceData.gd" id="2_qevyy"]
+[ext_resource type="Texture2D" uid="uid://beca4mn8toqu6" path="res://Assets/Barracks.png" id="3_4bnjs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln4g1"]
+atlas = ExtResource("3_4bnjs")
+region = Rect2(0, 48, 32, 17)
+
+[resource]
+script = ExtResource("2_qevyy")
+neededWorkers = 2
+produces = {
+0: 0,
+1: 15,
+2: 0
+}
+name = "Schweinefarm"
+texture = SubResource("AtlasTexture_ln4g1")
+description = ""
+buildingNode = ExtResource("1_pvcnn")
+buildingCategory = 1
+buildingCost = 3
+energyCost = 12
+co2 = 60.0

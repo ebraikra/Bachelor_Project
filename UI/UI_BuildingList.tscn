@@ -1,0 +1,199 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckygeo3005h86"]
+
+[ext_resource type="Script" path="res://UI/UI_BuildingList.gd" id="1_ylif4"]
+[ext_resource type="Texture2D" uid="uid://d3jdv7pmf6fdq" path="res://Assets/UiIcons.png" id="3_hd315"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8e08"]
+atlas = ExtResource("3_hd315")
+region = Rect2(0, 16, 15, 15)
+
+[node name="BuildingList" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_ylif4")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -317.0
+offset_top = -165.0
+offset_right = 318.0
+grow_horizontal = 2
+grow_vertical = 0
+tab_alignment = 1
+current_tab = 3
+clip_tabs = false
+
+[node name="Wood" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Wood"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Wood/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Wood/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Energy" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Energy"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Energy/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Energy/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Food" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Food"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Food/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Food/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Misc" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Misc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Misc/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Misc/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Hammer" type="TextureButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 328.0
+offset_top = -128.0
+offset_right = 368.0
+offset_bottom = -80.0
+size_flags_vertical = 4
+disabled = true
+ignore_texture_size = true
+stretch_mode = 5
+metadata/_edit_group_ = true
+
+[node name="Icon" type="TextureRect" parent="Hammer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+texture = SubResource("AtlasTexture_h8e08")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hammer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Hammer"]
+visible = false
+layout_mode = 0
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 202.0
+offset_bottom = -5.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Hammer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="Hammer/Panel/MarginContainer"]
+layout_mode = 2
+text = "Nicht genügend Holz vorhanden!"
+
+[connection signal="pressed" from="Hammer" to="." method="_on_hammer_pressed"]

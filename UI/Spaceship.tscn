@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bssy1tgb437eu"]
+
+[ext_resource type="Script" path="res://UI/Spaceship.gd" id="1_133fq"]
+[ext_resource type="Texture2D" uid="uid://edcy2rdh4jxh" path="res://Assets/Spaceship.png" id="1_qd4i8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s6ajs"]
+load_path = "res://.godot/imported/FarmerRed.png-b2fe6a48b01b2c263071f61597937c66.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo7mr"]
+atlas = SubResource("CompressedTexture2D_s6ajs")
+region = Rect2(3, 2, 10, 12)
+
+[node name="Spaceship" type="Node2D"]
+script = ExtResource("1_133fq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("1_qd4i8")
+
+[node name="ResPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -151.0
+offset_right = 30.0
+offset_bottom = -103.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="ResPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -7.5
+offset_top = 6.0
+offset_right = 7.5
+offset_bottom = 23.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_xo7mr")
+stretch_mode = 4
+
+[node name="ResCount" type="Label" parent="ResPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -24.0
+offset_right = 20.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1x"
+horizontal_alignment = 1

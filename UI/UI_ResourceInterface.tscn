@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1sgf4jwfr13k"]
+
+[ext_resource type="Script" path="res://UI/UI_ResourceInterface.gd" id="1_qv3gh"]
+
+[node name="ResourceInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qv3gh")
+
+[node name="ResourcesContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="FoodContainer" type="HBoxContainer" parent="ResourcesContainer"]
+layout_mode = 2
+
+[node name="FoodIcon" type="TextureRect" parent="ResourcesContainer/FoodContainer"]
+layout_mode = 2
+
+[node name="FoodLabel" type="Label" parent="ResourcesContainer/FoodContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="EnergyContainer" type="HBoxContainer" parent="ResourcesContainer"]
+layout_mode = 2
+
+[node name="EnergyIcon" type="TextureRect" parent="ResourcesContainer/EnergyContainer"]
+layout_mode = 2
+
+[node name="EnergyLabel" type="Label" parent="ResourcesContainer/EnergyContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="WoodContainer" type="HBoxContainer" parent="ResourcesContainer"]
+layout_mode = 2
+
+[node name="WoodIcon" type="TextureRect" parent="ResourcesContainer/WoodContainer"]
+layout_mode = 2
+
+[node name="WoodLabel" type="Label" parent="ResourcesContainer/WoodContainer"]
+layout_mode = 2
+text = "100"
