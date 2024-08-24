@@ -33,7 +33,7 @@ func _On_Day_Ended() -> void:
 	else:
 		while treeCounter > treeSpawnRate:
 			if GetAllEndings().is_empty():
-				RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
+				RoundManager.StartPhase(RoundManager.PHASES.LOSEROUNDTREE)
 				return
 			var tree: Vector2i = GetAllEndings().pick_random()
 			set_cell(1, tree, 0, Vector2i(0, 1))
@@ -42,7 +42,7 @@ func _On_Day_Ended() -> void:
 func delete_trees_on_produced_wood(woodneed, treeCounter) -> void:
 	while woodneed > treeCounter:
 		if GetAllEndings().is_empty():
-			RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
+			RoundManager.StartPhase(RoundManager.PHASES.LOSEROUNDTREE)
 			return
 		var tree: Vector2i = GetAllEndings().pick_random()
 		set_cell(1, tree, 0, Vector2i(0, 1))

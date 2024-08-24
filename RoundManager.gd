@@ -4,12 +4,14 @@ extends Node
 #ob's das Intro ist, der Spieler gerade baut, die Runde veliert etc.
 
 signal RoundLost
+signal RoundLostTree
 
 enum PHASES {
 	INTRO,
 	BUILD,
 	EVENT,
 	LOSEROUND,
+	LOSEROUNDTREE,
 	OUTRO
 }
 
@@ -21,6 +23,8 @@ func StartPhase(phase: PHASES) -> void:
 			_PhaseBuild()
 		PHASES.LOSEROUND:
 			RoundLost.emit()
+		PHASES.LOSEROUNDTREE:
+			RoundLostTree.emit()
 
 #Codeleiche
 func _PhaseBuild() -> void:

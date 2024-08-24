@@ -6,6 +6,7 @@ func _ready() -> void:
 	GlobalSignals.NewDayStarted.connect(_On_NewDay_Started)
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
 	RoundManager.RoundLost.connect(_On_RoundLost)
+	RoundManager.RoundLostTree.connect(_On_RoundLostTree)
 
 #Deaktiviert den "Neuer Tag" Button, um potentiellen Fehlern entgegen zu wirken
 func _On_NewDay_Started() -> void:
@@ -18,6 +19,9 @@ func _On_Day_Ended() -> void:
 #Zeigt die Verloren-Übersicht an
 func _On_RoundLost() -> void:
 	$CanvasLayer/LosePanel.show()
+	
+func _On_RoundLostTree() -> void:
+	$CanvasLayer/LosePanel2.show()
 
 #Sorgt dafür, das Gebäude an das Spielgitter "gesnapped" werden
 func _unhandled_input(event: InputEvent) -> void:
