@@ -85,14 +85,21 @@ func _On_DayEnded() -> void:
 	var activeWorkstations: Array = GetWorkStations().filter(
 		func(ws: Workstation) -> bool:
 			return !GetNotFilledWorkStations().has(ws) and ws.IsActive())
-	
+
+	var countWoodProduction: int = 0
 	#Sammelt die Ressourcen der aktiven Arbeitsplätze
 	for workstation: Workstation in activeWorkstations:
 		#energy += workstation.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 		food += workstation.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 		wood += workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
+		countWoodProduction += workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
 		co2 += workstation.data.co2
-	
+	var treeCounter: int = 0
+	if tile_map:
+		tile_map.delete_trees_on_produced_wood(countWoodProduction, treeCounter)
+		print("yes")
+	else:
+		print("TileMap reference is null, cannot call the function.")
 	#Eventuelle Codeleiche?-------------------------
 	#activeFoodStations = activeWorkstations.filter(func(ws: Workstation) -> bool:
 		#return ws.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD and ws.IsActive())	
