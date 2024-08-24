@@ -13,6 +13,8 @@ var accommodations: Array[Accommodation]
 var usedEnergy: int = 0
 var activeEnergyStations: Array
 var activeFoodStations: Array
+@onready var tile_map = $"/root/World/WorldMap"
+
 
 var days: int = 0
 
