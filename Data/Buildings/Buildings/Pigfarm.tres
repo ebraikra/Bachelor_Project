@@ -23,4 +23,4 @@ buildingNode = ExtResource("1_pvcnn")
 buildingCategory = 1
 buildingCost = 3
 energyCost = 12
-co2 = 60.0
+co2 = 60

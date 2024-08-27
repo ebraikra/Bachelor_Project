@@ -29,6 +29,7 @@ var currentAlienState: ALIENSTATE = ALIENSTATE.SLEEP
 
 func _ready() -> void:
 	GlobalSignals.BuildingPlaced.connect(_On_BuildingPlaced)
+	GlobalSignals.BuildingRemoved.connect(_On_BuildingRemoved)
 	GlobalSignals.NewDayStarted.connect(_On_NewDayStarted)
 	GlobalSignals.DayEnded.connect(_On_DayEnded)
 
@@ -75,6 +76,11 @@ func _On_DayEnded() -> void:
 		func(ws: Workstation) -> bool:
 			return !ws.IsActive()
 	)
+	#Filtert alle Arbeitsplätze die aktiv sind
+	var activeStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return ws.IsActive()
+	)
 	#Checkt, ob die Energiekosten einzelner inaktiver Arbeitsplätze nicht der Gesamtenergie überschreiten.
 	#Wenn nicht, wird die Energie verbraucht und das Gebäude aktiv gesetzt
 	for ws: Workstation in inactiveStations:
@@ -99,7 +105,6 @@ func _On_DayEnded() -> void:
 	var treeCounter: int = 0
 	if tile_map:
 		tile_map.delete_trees_on_produced_wood(countWoodProduction, treeCounter)
-		print("yes")
 	else:
 		print("TileMap reference is null, cannot call the function.")
 	#Eventuelle Codeleiche?-------------------------
@@ -123,15 +128,19 @@ func _On_DayEnded() -> void:
 	
 	# ToDo: Hochzählen von Tagen
 	days += 1
-	print(days)
+	print("Runde: ", days)
 	# Ab 5 tagen = Frage aufploppen
 	if days % 5 == 0:
 		print("Fragen")
+	print("CO2: ", co2)
+	
+	print(buildings)
 
 #Ähnliche Logik zu oben, reagiert dieses mal nur darauf wenn ein Gebäude platziert wird
 func _On_BuildingPlaced(building: Node2D) -> void:
 	wood -= building.data.buildingCost
 	buildings.append(building)
+	building.connect("building_remove", self._On_BuildingRemoved) 
 	
 	if %Spaceship.residents.size() > 0:
 		if GetCountFreeSpace() > 0:
@@ -176,7 +185,17 @@ func _On_BuildingPlaced(building: Node2D) -> void:
 	
 	activeFoodStations = activeWorkstations.filter(func(ws: Workstation) -> bool:
 		return ws.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD and ws.IsActive())
+		
+func _On_BuildingRemoved(building: Node2D) -> void:
+	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.MISC:
+		building.queue_free()
 
+func getLumberjacks() -> Array:
+	return buildings.filter(
+		func(building: Node2D) -> bool:
+			return building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.WOOD
+	)
+	
 #Rückgabe aller Wohneinheiten
 func GetAccommodations() -> Array:
 	return buildings.filter(

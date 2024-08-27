@@ -10,6 +10,9 @@ var allTrees: Array
 var hasBeenNotified: bool = false
 var alreadyAnalysed: bool = false
 
+#Testzwecke
+#var woodneed: int = 15
+
 func _ready() -> void:
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
 
@@ -83,3 +86,5 @@ func GetAllEndings() -> Array:
 #Rückgabe aller Bäume
 func GetAllTrees() -> Array:
 	return get_used_cells(1)
+	
+

@@ -87,13 +87,13 @@ animations = [{
 }]
 
 [node name="Lumberjack" type="StaticBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
 script = ExtResource("1_tjqs7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jhlbd")
-disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_mdttd")
@@ -105,6 +105,7 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-48, 16, -48, -16, -32, -16, -32, -32, -16, -32, -16, -48, 16, -48, 16, -32, 32, -32, 32, -16, 48, -16, 48, 16, 32, 16, 32, 32, 16, 32, 16, 48, -16, 48, -16, 32, -32, 32, -32, 16)
+disabled = true
 
 [node name="Tiles" type="TileMap" parent="."]
 visible = false
@@ -127,5 +128,6 @@ position = Vector2(0, -18)
 scale = Vector2(0.08525, 0.08525)
 texture = ExtResource("5_sg6dn")
 
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

@@ -3,6 +3,7 @@ extends Node2D
 
 #Basislogik für die Produktionsstätten
 #Hier ausreichend für Holz&Energie, für die anderen Produktionen gibt's eine extra Klasse
+signal building_remove(building: Node2D)
 
 var workers: Array[Alien]
 var data: BuildingData
@@ -17,7 +18,9 @@ var active: bool = false
 
 func _ready() -> void:
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
+	#GlobalSignals.BuildingRemoved.connect(_On_BuildingRemoved)
 	NEEDED_WORKERS = data.neededWorkers
+
 
 #Setzt das Gebäude aktiv/inaktiv, bspw. wenn kein Strom zur Verfügung steht wird es inaktiv
 func SetActive(state: bool) -> void:
@@ -61,3 +64,11 @@ func NeedsWorkers() -> bool:
 #Rückgabe wie viele NPCs benötigt werden
 func GetNeededWorkersAmount() -> int:
 	return NEEDED_WORKERS - workers.size()
+	
+# Eingabeereignis bei Klick auf das Gebäude behandeln
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		print("Building removed")
+		emit_signal("building_remove", self)
+
+
