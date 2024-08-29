@@ -43,7 +43,6 @@ func _On_Building_Placed(building: Node) -> void:
 		food_indi.text = "[center][p align=center][color=green]+" + str(food - %ColonyService.GetPopulation().size() - 1)
 	alien_label.text = "%s/%s" % [str(%ColonyService.GetResidentWithJob().size()), str(%ColonyService.GetPopulation().size())]
 
-#Codeleiche----------------------------------------
 func _On_Building_Removed() -> void:
 	await get_tree().create_timer(0.5).timeout
 	food_label.text = str(%ColonyService.food)

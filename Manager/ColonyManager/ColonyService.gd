@@ -46,6 +46,20 @@ func _On_NewDayStarted() -> void:
 func _On_DayEnded() -> void:
 	#Checkt, ob es NPCs im Raumschiff gibt, wenn ja werden diese freien Wohneinheiten zugewiesen
 	print("Ending day. Current food: ", food)
+	print("Buildings at the beginning of DayEnded: ", buildings.size())  # Debugging the size of buildings array
+	var activeStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return ws.IsActive()
+	)
+	var inactiveStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return !ws.IsActive()
+	)
+
+	print("Active workstations at the beginning of DayEnded: ", activeStations.size())
+	print("Inactive workstations at the beginning of DayEnded: ", inactiveStations.size())
+	for building in buildings:
+		print("Building in list: ", building.name, "Category: ", building.data.buildingCategory)
 
 	AssignWorkersToWorkstations()
 	UpdateWorkstations()
@@ -125,6 +139,13 @@ func UpdateWorkstations() -> void:
 			usedEnergy += ws.data.energyCost
 		else:
 			ws.SetActive(false)
+	#Durchläuft alle Gebäude die nicht mit Energie versort werden können und schaltet die aus.
+	for ws: Workstation in activeStations:
+		if usedEnergy > energy:
+			ws.SetActive(false)
+			usedEnergy -= ws.data.energyCost
+		else:
+			break
 	print("Active workstations: ", activeStations.size())  # Debugging
 	
 func UpdateResources() -> void:
@@ -162,15 +183,40 @@ func UpdateResources() -> void:
 		%Analysis.StartNewAnalysis()
 	if co2 <= 0: co2 = 0
 	#Ein NPC benötigt pro Tag eine Einheit Essen, diese wird hier abgezogen
+	print("Population size before food deduction: ", GetPopulation().size())
 	food -= GetPopulation().size()
+	print("Food after deduction: ", food)
 
 func _On_BuildingRemoved(building: Node2D) -> void:
-	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.MISC:
-		building.queue_free()
-
+	if building == null:
+		print("Error: Trying to remove a null building!")  # Debugging
+		return
+	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:
+		if building in buildings:
+			print("Removing building: ", building.data.buildingCategory)
+			usedEnergy -= building.data.energyCost
+			buildings.erase(building)
+			building.queue_free()
+			UpdateWorkstations()
+			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
+	else:
+		if building in buildings:
+			print("energy:", energy)
+			print(building.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY])
+			energy -= building.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+			print("energydecrease:", energy)
+			buildings.erase(building)
+			building.queue_free()
+			UpdateWorkstations()
+			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
 	AssignWorkersToWorkstations()
-	UpdateWorkstations()
-	UpdateResources()
+	
+	
+	var activeStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return ws.IsActive()
+	)
+	print("Active workstations after removed building: ", activeStations.size())
 
 func getLumberjacks() -> Array:
 	return buildings.filter(
