@@ -12,11 +12,13 @@ var hoveringBuilding: Node2D = null
 func _ready() -> void:
 	GlobalSignals.BuildingHover.connect(_On_BuildingHover)
 	GlobalSignals.BuildingPlaced.connect(_On_BuildingPlaced)
+	GlobalSignals.DayEnded.connect(_On_DayEnded)
 	_Update()
 
 func _On_BuildingPlaced(building: Node) -> void:
 	_Update()
-
+func _On_DayEnded() -> void:
+	_Update()
 #Dient dazu, das sobald ein Gebäude platziert wird, nochmal zu checken um weiterhin genügend Ressourcen
 #verfügbar sind, falls nicht, werden Gebäude als "NichtBaubar" definiert
 func _Update() -> void:
