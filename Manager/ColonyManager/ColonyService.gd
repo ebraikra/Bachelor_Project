@@ -85,12 +85,12 @@ func _On_BuildingPlaced(building: Node2D) -> void:
 	wood -= building.data.buildingCost
 	buildings.append(building)
 	building.connect("building_remove", Callable(self, "_On_Building_Removed"))
-	
+	var activeWorkstations = get_active_stations()
 
 	AssignWorkersToWorkstations()
 	 # Arbeitsplätze auffüllen
 	UpdateWorkstations()
-
+	update_activeFoodStations(activeWorkstations)
 				
 func AssignWorkersToWorkstations() -> void:
 	if %Spaceship.residents.size() > 0:

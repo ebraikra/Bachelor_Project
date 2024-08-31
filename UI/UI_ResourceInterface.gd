@@ -36,7 +36,6 @@ func update_resource_labels() -> void:
 
 func _On_Building_Placed(building: Node) -> void:
 	await get_tree().create_timer(1).timeout
-	building.connect("building_remove", Callable(self, "_On_Building_Removed")) 
 	update_resource_labels()
 
 func _On_Building_Removed() -> void:
