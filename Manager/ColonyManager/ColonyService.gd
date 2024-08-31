@@ -62,7 +62,8 @@ func _On_DayEnded() -> void:
 	UpdateWorkstations()
 	# Aktualisiere Ressourcen basierend auf aktiven Arbeitsplätzen
 	UpdateResources()
-	
+	#Fix wenn alle Gebäude gelöscht werden, geht das ins Minus
+	if usedEnergy <= 0: usedEnergy = 0
 	#Leitet den Lose-Screen ein, wenn die Nahrung <= 0 gesunken ist
 	if food <= 0:
 		RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
