@@ -22,6 +22,6 @@ texture = SubResource("AtlasTexture_40l6p")
 description = ""
 buildingNode = ExtResource("1_32w3v")
 buildingCategory = 2
-buildingCost = 2
+buildingCost = 0
 energyCost = 6
 co2 = 10
