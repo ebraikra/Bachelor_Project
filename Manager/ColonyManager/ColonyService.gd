@@ -31,8 +31,9 @@ func _ready() -> void:
 	GlobalSignals.BuildingPlaced.connect(_On_BuildingPlaced)
 	GlobalSignals.NewDayStarted.connect(_On_NewDayStarted)
 	GlobalSignals.DayEnded.connect(_On_DayEnded)
+	#GlobalSignals.BuildingRemoved.connect(_On_Building_Removed)
 	for building in buildings:
-		building.connect("building_remove", Callable(self, "_On_BuildingRemoved")) 
+		building.connect("building_remove", Callable(self, "_On_Building_Removed")) 
 
 #Sobald ein neuer Tag startet werden alle NPCs zur Arbeit geschickt und nach 5Sek wieder nach Hause geschickt
 func _On_NewDayStarted() -> void:
@@ -83,7 +84,7 @@ func _On_DayEnded() -> void:
 func _On_BuildingPlaced(building: Node2D) -> void:
 	wood -= building.data.buildingCost
 	buildings.append(building)
-	building.connect("building_remove", Callable(self, "_On_BuildingRemoved"))
+	building.connect("building_remove", Callable(self, "_On_Building_Removed"))
 	
 
 	AssignWorkersToWorkstations()
@@ -145,16 +146,23 @@ func UpdateWorkstations() -> void:
 		else:
 			break
 	#print("Active workstations: ", activeStations.size())  # Debugging
-	
-func UpdateResources() -> void:
-	#Filtert alle aktiven Arbeitsplätze
+func get_active_stations() -> Array:
+	# Holen Sie sich alle Arbeitsstationen, die aktiv und gefüllt sind
 	var activeWorkstations: Array = GetWorkStations().filter(
 		func(ws: Workstation) -> bool:
 			return !GetNotFilledWorkStations().has(ws) and ws.IsActive()
 	)
+	return activeWorkstations
+# Aktualisiert Aktive FoodStations
+func update_activeFoodStations(activeWorkstations) -> void:
 	activeFoodStations = activeWorkstations.filter(func(ws: Workstation) -> bool:
 		return ws.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD and ws.IsActive()
 	)
+	
+func UpdateResources() -> void:
+	#Filtert alle aktiven Arbeitsplätze
+	var activeWorkstations = get_active_stations()
+	update_activeFoodStations(activeWorkstations)
 	var countWoodProduction: int = 0
 	#Sammelt die Ressourcen der aktiven Arbeitsplätze
 	for workstation: Workstation in activeWorkstations:
@@ -185,7 +193,8 @@ func UpdateResources() -> void:
 	food -= GetPopulation().size()
 	#print("Food after deduction: ", food)
 
-func _On_BuildingRemoved(building: Node2D) -> void:
+func _On_Building_Removed(building: Node2D) -> void:
+	var activeWorkstations = get_active_stations()
 	if building == null:
 		print("Error: Trying to remove a null building!")  # Debugging
 		return
@@ -200,6 +209,7 @@ func _On_BuildingRemoved(building: Node2D) -> void:
 			building = null
 			AssignWorkersToWorkstations()
 			UpdateWorkstations()
+			update_activeFoodStations(activeWorkstations)
 			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
 	elif building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY:
 		if building in buildings:
@@ -213,6 +223,7 @@ func _On_BuildingRemoved(building: Node2D) -> void:
 			building = null
 			AssignWorkersToWorkstations()
 			UpdateWorkstations()
+			update_activeFoodStations(activeWorkstations)
 			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
 	
 	
