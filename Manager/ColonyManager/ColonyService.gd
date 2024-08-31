@@ -194,6 +194,7 @@ func _On_BuildingRemoved(building: Node2D) -> void:
 			print("Removing building: ", building.data.buildingCategory)
 			if !building.NeedsWorkers():
 				usedEnergy -= building.data.energyCost
+				if usedEnergy <= 0: usedEnergy = 0
 			buildings.erase(building)
 			building.queue_free()
 			building = null
