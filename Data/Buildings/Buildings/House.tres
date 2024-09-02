@@ -18,4 +18,4 @@ buildingNode = ExtResource("1_c1385")
 buildingCategory = 3
 buildingCost = 15
 energyCost = 0
-co2 = 0.0
+co2 = 10

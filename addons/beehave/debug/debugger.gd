@@ -60,7 +60,7 @@ func _on_make_floating() -> void:
 
 	var border_size := Vector2(4, 4) * BeehaveUtils.get_editor_scale()
 	var editor_interface: EditorInterface = plugin.get_editor_interface()
-	var editor_main_screen = editor_interface.get_editor_main_screen()
+	var editor_main_screen: VBoxContainer = editor_interface.get_editor_main_screen()
 	debugger_tab.get_parent().remove_child(debugger_tab)
 
 	floating_window = Window.new()

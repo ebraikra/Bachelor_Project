@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bsi2btyqwer3y"]
+[gd_scene load_steps=28 format=3 uid="uid://bsi2btyqwer3y"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_u2nyf"]
 [ext_resource type="TileSet" uid="uid://dll8h3a6qkx2o" path="res://Assets/tileset.tres" id="2_0q6lx"]
@@ -23,6 +23,9 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjgln"]
 atlas = ExtResource("7_pbgl5")
 region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2axn"]
+size = Vector2(10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8tc8b"]
 atlas = ExtResource("3_lnxqu")
@@ -350,6 +353,12 @@ script = ExtResource("3_w1c63")
 
 [node name="Buildings" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Area2D" type="Area2D" parent="Buildings"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Area2D"]
+position = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_b2axn")
 
 [node name="Trees" type="Node2D" parent="."]
 

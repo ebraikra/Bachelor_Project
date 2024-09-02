@@ -31,6 +31,9 @@ func _ready() -> void:
 	GlobalSignals.BuildingPlaced.connect(_On_BuildingPlaced)
 	GlobalSignals.NewDayStarted.connect(_On_NewDayStarted)
 	GlobalSignals.DayEnded.connect(_On_DayEnded)
+	#GlobalSignals.BuildingRemoved.connect(_On_Building_Removed)
+	for building in buildings:
+		building.connect("building_remove", Callable(self, "_On_Building_Removed")) 
 
 #Sobald ein neuer Tag startet werden alle NPCs zur Arbeit geschickt und nach 5Sek wieder nach Hause geschickt
 func _On_NewDayStarted() -> void:
@@ -43,6 +46,53 @@ func _On_NewDayStarted() -> void:
 #Logik wenn der Tag endet
 func _On_DayEnded() -> void:
 	#Checkt, ob es NPCs im Raumschiff gibt, wenn ja werden diese freien Wohneinheiten zugewiesen
+	#print("Buildings at the beginning of DayEnded: ", buildings.size())  # Debugging the size of buildings array
+	var activeStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return ws.IsActive()
+	)
+	var inactiveStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return !ws.IsActive()
+	)
+
+	#print("Active workstations at the beginning of DayEnded: ", activeStations.size())
+	#print("Inactive workstations at the beginning of DayEnded: ", inactiveStations.size())
+
+	AssignWorkersToWorkstations()
+	UpdateWorkstations()
+	# Aktualisiere Ressourcen basierend auf aktiven Arbeitsplätzen
+	UpdateResources()
+	#Fix wenn alle Gebäude gelöscht werden, geht das ins Minus
+	if usedEnergy <= 0: usedEnergy = 0
+	#Leitet den Lose-Screen ein, wenn die Nahrung <= 0 gesunken ist
+	if food <= 0:
+		RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
+		return
+	
+	# ToDo: Hochzählen von Tagen
+	days += 1
+	print("Runde: ", days)
+	# Ab 5 tagen = Frage aufploppen
+	if days % 5 == 0:
+		print("Fragen")
+	print("CO2: ", co2)
+	
+	#print(buildings)
+
+#Ähnliche Logik zu oben, reagiert dieses mal nur darauf wenn ein Gebäude platziert wird
+func _On_BuildingPlaced(building: Node2D) -> void:
+	wood -= building.data.buildingCost
+	buildings.append(building)
+	building.connect("building_remove", Callable(self, "_On_Building_Removed"))
+	var activeWorkstations = get_active_stations()
+
+	AssignWorkersToWorkstations()
+	 # Arbeitsplätze auffüllen
+	UpdateWorkstations()
+	update_activeFoodStations(activeWorkstations)
+				
+func AssignWorkersToWorkstations() -> void:
 	if %Spaceship.residents.size() > 0:
 		if GetCountFreeSpace() > 0:
 			for freeAccommodation: Accommodation in GetFreeAccommodations():
@@ -50,13 +100,13 @@ func _On_DayEnded() -> void:
 					for resident: Alien in %Spaceship.residents:
 						freeAccommodation.AddResident(resident)
 						await get_tree().create_timer(0.2).timeout
-						%Spaceship.residents.clear()
+					%Spaceship.residents.clear()
+					return
 				else:
 					for i: int in freeAccommodation.GetFreeSpace():
 						freeAccommodation.AddResident(%Spaceship.residents.pop_front())
 						await get_tree().create_timer(0.2).timeout
-	#Checkt, ob es Arbeitsplätze gibt denen es an Arbeitskräften mangelt, wenn ja werden die NPCs ohne
-	#Job rausgefiltert und zugewiesen
+	# Zuweisen von Arbeitern zu nicht vollständig besetzten Arbeitsplätzen
 	if !GetNotFilledWorkStations().is_empty():
 		for workplace: Workstation in GetNotFilledWorkStations():
 			if !GetResidentsWithoutJob().is_empty():
@@ -70,10 +120,15 @@ func _On_DayEnded() -> void:
 				#if !activeEnergyStations.find(workplace):
 					#activeEnergyStations.append(workplace)
 				energy += workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
-	#Filtert alle Arbeitsplätze die aufgrund zu wenig Strom inaktiv sind
+
+func UpdateWorkstations() -> void:
 	var inactiveStations: Array = GetWorkStations().filter(
 		func(ws: Workstation) -> bool:
 			return !ws.IsActive()
+	)
+	var activeStations: Array = GetWorkStations().filter(
+		func(ws: Workstation) -> bool:
+			return ws.IsActive()
 	)
 	#Checkt, ob die Energiekosten einzelner inaktiver Arbeitsplätze nicht der Gesamtenergie überschreiten.
 	#Wenn nicht, wird die Energie verbraucht und das Gebäude aktiv gesetzt
@@ -83,11 +138,31 @@ func _On_DayEnded() -> void:
 			usedEnergy += ws.data.energyCost
 		else:
 			ws.SetActive(false)
-	#Filtert alle aktiven Arbeitsplätze
+	#Durchläuft alle Gebäude die nicht mit Energie versort werden können und schaltet die aus.
+	for ws: Workstation in activeStations:
+		if usedEnergy > energy:
+			ws.SetActive(false)
+			usedEnergy -= ws.data.energyCost
+		else:
+			break
+	#print("Active workstations: ", activeStations.size())  # Debugging
+func get_active_stations() -> Array:
+	# Holen Sie sich alle Arbeitsstationen, die aktiv und gefüllt sind
 	var activeWorkstations: Array = GetWorkStations().filter(
 		func(ws: Workstation) -> bool:
-			return !GetNotFilledWorkStations().has(ws) and ws.IsActive())
-
+			return !GetNotFilledWorkStations().has(ws) and ws.IsActive()
+	)
+	return activeWorkstations
+# Aktualisiert Aktive FoodStations
+func update_activeFoodStations(activeWorkstations) -> void:
+	activeFoodStations = activeWorkstations.filter(func(ws: Workstation) -> bool:
+		return ws.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD and ws.IsActive()
+	)
+	
+func UpdateResources() -> void:
+	#Filtert alle aktiven Arbeitsplätze
+	var activeWorkstations = get_active_stations()
+	update_activeFoodStations(activeWorkstations)
 	var countWoodProduction: int = 0
 	#Sammelt die Ressourcen der aktiven Arbeitsplätze
 	for workstation: Workstation in activeWorkstations:
@@ -99,7 +174,6 @@ func _On_DayEnded() -> void:
 	var treeCounter: int = 0
 	if tile_map:
 		tile_map.delete_trees_on_produced_wood(countWoodProduction, treeCounter)
-		print("yes")
 	else:
 		print("TileMap reference is null, cannot call the function.")
 	#Eventuelle Codeleiche?-------------------------
@@ -115,68 +189,57 @@ func _On_DayEnded() -> void:
 		%Analysis.StartNewAnalysis()
 	if co2 <= 0: co2 = 0
 	#Ein NPC benötigt pro Tag eine Einheit Essen, diese wird hier abgezogen
+	#print("Population size before food deduction: ", GetPopulation().size())
 	food -= GetPopulation().size()
-	#Leitet den Lose-Screen ein, wenn die Nahrung <= 0 gesunken ist
-	if food <= 0:
-		RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
+	#print("Food after deduction: ", food)
+
+func _On_Building_Removed(building: Node2D) -> void:
+	var activeWorkstations = get_active_stations()
+	if building == null:
+		print("Error: Trying to remove a null building!")  # Debugging
 		return
+	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:
+		if building in buildings:
+			print("Removing building: ", building.data.buildingCategory)
+			if !building.NeedsWorkers():
+				usedEnergy -= building.data.energyCost
+				if usedEnergy <= 0: usedEnergy = 0
+			buildings.erase(building)
+			building.queue_free()
+			building = null
+			AssignWorkersToWorkstations()
+			UpdateWorkstations()
+			update_activeFoodStations(activeWorkstations)
+			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
+	elif building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY:
+		if building in buildings:
+			print("energy:", energy)
+			print(building.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY])
+			if !building.NeedsWorkers():
+				energy -= building.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+			print("energydecrease:", energy)
+			buildings.erase(building)
+			building.queue_free()
+			building = null
+			AssignWorkersToWorkstations()
+			UpdateWorkstations()
+			update_activeFoodStations(activeWorkstations)
+			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
 	
-	# ToDo: Hochzählen von Tagen
-	days += 1
-	print(days)
-	# Ab 5 tagen = Frage aufploppen
-	if days % 5 == 0:
-		print("Fragen")
-
-#Ähnliche Logik zu oben, reagiert dieses mal nur darauf wenn ein Gebäude platziert wird
-func _On_BuildingPlaced(building: Node2D) -> void:
-	wood -= building.data.buildingCost
-	buildings.append(building)
 	
-	if %Spaceship.residents.size() > 0:
-		if GetCountFreeSpace() > 0:
-			for freeAccommodation: Accommodation in GetFreeAccommodations():
-				if %Spaceship.residents.size() - freeAccommodation.GetFreeSpace() <= 0:
-					for resident: Alien in %Spaceship.residents:
-						freeAccommodation.AddResident(resident)
-						await get_tree().create_timer(0.2).timeout
-					%Spaceship.residents.clear()
-					return
-				else:
-					for i: int in freeAccommodation.GetFreeSpace():
-						freeAccommodation.AddResident(%Spaceship.residents.pop_front())
-						await get_tree().create_timer(0.2).timeout
-	if !GetNotFilledWorkStations().is_empty():
-		for workplace: Workstation in GetNotFilledWorkStations():
-			if GetResidentsWithoutJob().is_empty():
-				return
-			else:
-				if GetResidentsWithoutJob().size() - workplace.GetNeededWorkersAmount() <= 0:
-					for resident: Alien in GetResidentsWithoutJob():
-						workplace.AddWorker(resident)
-				else:
-					for i: int in workplace.GetNeededWorkersAmount():
-						workplace.AddWorker(GetResidentsWithoutJob().pop_front())
-			if workplace.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY and !workplace.NeedsWorkers():
-				energy += workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
-	var inactiveStations: Array = GetWorkStations().filter(
+	
+	var activeStations: Array = GetWorkStations().filter(
 		func(ws: Workstation) -> bool:
-			return !ws.IsActive()
+			return ws.IsActive()
 	)
-	for ws: Workstation in inactiveStations:
-		if ws.data.energyCost + usedEnergy <= energy:
-			ws.SetActive(true)
-			usedEnergy += ws.data.energyCost
-		else:
-			ws.SetActive(false)
-	
-	var activeWorkstations: Array = GetWorkStations().filter(
-		func(ws: Workstation) -> bool:
-			return !GetNotFilledWorkStations().has(ws))
-	
-	activeFoodStations = activeWorkstations.filter(func(ws: Workstation) -> bool:
-		return ws.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD and ws.IsActive())
+	#print("Active workstations after removed building: ", activeStations.size())
 
+func getLumberjacks() -> Array:
+	return buildings.filter(
+		func(building: Node2D) -> bool:
+			return building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.WOOD
+	)
+	
 #Rückgabe aller Wohneinheiten
 func GetAccommodations() -> Array:
 	return buildings.filter(
