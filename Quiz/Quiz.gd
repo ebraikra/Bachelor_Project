@@ -17,9 +17,11 @@ var answerGiven: int = 0
 
 func _ready():
 	hide()
+	questionsList.shuffle()
 	GlobalSignals.StartQuiz.connect(start_quiz)
 
 func start_quiz():
+	# zeigt keine Fragen mehr, wenn alle Fragen beantwortet worden sind
 	if questionsList[indexQuestion] != null:
 		show()
 		show_question()
@@ -31,9 +33,9 @@ func show_question():
 	question = questionsList[indexQuestion]
 	questionLabel.text = question.TEXT
 	var answers = question.OPTIONS
+	answers.shuffle()
 	for answer in answers:
 		answerList.add_item(answer)
-
 	
 func read_json_file(filename: String) -> Array:
 	var file = FileAccess.open(filename, FileAccess.READ)
@@ -57,9 +59,15 @@ func read_json_file(filename: String) -> Array:
 func check_answer():
 	correctAnswer = question.CORRECTINDEX
 	if answerGiven == correctAnswer:
-		hintText.text = question.CORRECTANSWER #TODO Random funktion ob niete oder nicht
+		var random_float = randf()
+		if random_float < 0.7:
+			# 70% chance ist Niete
+			hintText.text = question.CORRECTRIVET
+		else:
+			# 30% chance auf Buff
+			hintText.text = question.CORRECTANSWER
 	else:
-		hintText.text = question.WRONGANSWER
+		hintText.text = question.WRONGANSWER #TODO Debuff
 		
 func show_result():
 	answerList.hide()
