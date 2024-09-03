@@ -2,8 +2,8 @@
 	{
 		"TEXT": "Question 1",
 		"OPTIONS": ["Test1","Test2","Test3"],
-		"CORRECTINDEX": 1,
-		"CORRECTANSWER": "yes",
+		"CORRECTANSWER": "Test2",
+		"CORRECTANSWERTEXT": "yes",
 		"CORRECTRIVET": "rivet",
 		"WRONGANSWER": "wrong answer",
 		"BUFF": "FOOD"
@@ -11,8 +11,8 @@
 	{
 		"TEXT": "Question 2",
 		"OPTIONS": ["Test1","Test2","Test3"],
-		"CORRECTINDEX": 0,
-		"CORRECTANSWER": "yes",
+		"CORRECTANSWER": "Test1",
+		"CORRECTANSWERTEXT": "yes",
 		"CORRECTRIVET": "rivet",
 		"WRONGANSWER": "wrong answer",
 		"BUFF": "WOOD"
@@ -20,8 +20,8 @@
 	{
 		"TEXT": "Question 3",
 		"OPTIONS": ["Test1","Test2","Test3"],
-		"CORRECTINDEX": 2,
-		"CORRECTANSWER": "yes",
+		"CORRECTANSWER": "Test3",
+		"CORRECTANSWERTEXT": "yes",
 		"CORRECTRIVET": "rivet",
 		"WRONGANSWER": "wrong answer",
 		"BUFF": "ENERGY"

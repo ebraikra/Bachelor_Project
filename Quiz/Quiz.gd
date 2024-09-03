@@ -12,8 +12,7 @@ var file
 var questionsList: Array = read_json_file("Quiz/Questions.json")
 var question: Dictionary
 var indexQuestion: int = 0
-var correctAnswer: int = 0
-var answerGiven: int = 0
+var answerGiven: String
 
 func _ready():
 	hide()
@@ -57,15 +56,14 @@ func read_json_file(filename: String) -> Array:
 
 #Überprüft die Antworten und zieht die Texte von der json auf die Nodes, damit die sichtbar werden
 func check_answer():
-	correctAnswer = question.CORRECTINDEX
-	if answerGiven == correctAnswer:
+	if answerGiven == question.CORRECTANSWER:
 		var random_float = randf()
 		if random_float < 0.7:
 			# 70% chance ist Niete
 			hintText.text = question.CORRECTRIVET
 		else:
 			# 30% chance auf Buff
-			hintText.text = question.CORRECTANSWER
+			hintText.text = question.CORRECTANSWERTEXT
 	else:
 		hintText.text = question.WRONGANSWER #TODO Debuff
 		
@@ -89,4 +87,4 @@ func _on_check_button_pressed():
 
 #checkt welche antwort gegeben wurde
 func _on_answer_list_item_selected(index):
-	answerGiven = index
+	answerGiven = answerList.get_item_text(index)
