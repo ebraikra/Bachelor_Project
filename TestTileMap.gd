@@ -50,7 +50,7 @@ func delete_trees_on_produced_wood(woodneed, treeCounter) -> void:
 		var tree: Vector2i = GetAllEndings().pick_random()
 		set_cell(1, tree, 0, Vector2i(0, 1))
 		treeCounter += 1
-		print("deleted trees", treeCounter)
+		#print("deleted trees", treeCounter)
 
 #Passt den Spawnwert der Bäume an den CO2 Wert an, ähnlich wie bei den Wolken im Smogfilter "Cloudparticles.gd"
 func adjust_wood_based_on_co2() -> void:

@@ -8,6 +8,7 @@ signal NewDayStarted
 signal DayEnded
 signal BuildingHover
 signal AddAnalysis
+signal StartQuiz
 
 #Vordefinierte Typen für die Analyse-Berichte
 enum ANALYSE{

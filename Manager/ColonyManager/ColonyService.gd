@@ -70,12 +70,12 @@ func _On_DayEnded() -> void:
 		RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
 		return
 	
-	# ToDo: Hochzählen von Tagen
 	days += 1
 	print("Runde: ", days)
 	# Ab 5 tagen = Frage aufploppen
-	if days % 5 == 0:
-		print("Fragen")
+	if days % 1 == 0: # Change to 5 days
+		GlobalSignals.StartQuiz.emit()
+		print("QUIZ GO")
 	print("CO2: ", co2)
 	
 	#print(buildings)
