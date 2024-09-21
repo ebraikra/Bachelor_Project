@@ -26,7 +26,7 @@ atlas = ExtResource("7_pbgl5")
 region = Rect2(0, 64, 16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1me3k"]
-font_size = 50
+font_size = 30
 outline_size = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2axn"]
@@ -287,16 +287,9 @@ autowrap_mode = 2
 [node name="HSeparator" type="HSeparator" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="AnswerList" type="ItemList" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
+[node name="AnswerList" type="VBoxContainer" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 30
-allow_reselect = true
-max_text_lines = 4
-auto_height = true
-text_overrun_behavior = 2
-fixed_column_width = 1850
-icon_mode = 0
 
 [node name="Hinttext" type="RichTextLabel" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
 visible = false
@@ -515,7 +508,6 @@ script = ExtResource("17_63vif")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="PlanetManager/PlanetService" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Analysis" method="_on_button_pressed"]
-[connection signal="item_selected" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/AnswerList" to="CanvasLayer/Quiz" method="_on_answer_list_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Quiz" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/CheckButton" to="CanvasLayer/Quiz" method="_on_check_button_pressed"]
 [connection signal="body_entered" from="Camera2D/Indicator/Area2D" to="Camera2D/Indicator" method="_on_area_2d_body_entered"]

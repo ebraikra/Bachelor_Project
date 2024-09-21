@@ -65,7 +65,8 @@ func check_answer():
 			# 30% chance auf Buff
 			hintText.text = question.CORRECTANSWERTEXT
 	else:
-		hintText.text = question.WRONGANSWER #TODO Debuff
+		hintText.text = question.WRONGANSWER 
+		
 		
 func show_result():
 	answerList.hide()
