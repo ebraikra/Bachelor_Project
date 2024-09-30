@@ -7,6 +7,7 @@ extends Control
 @onready var button = $Panel/MarginContainer/VBoxContainer/Button
 @onready var checkButton = $Panel/MarginContainer/VBoxContainer/CheckButton
 @onready var hintText = $Panel/MarginContainer/VBoxContainer/Hinttext
+@onready var nextDay = $"../Button"
 
 var file
 var questionsList: Array = read_json_file("Quiz/Questions.json")
@@ -24,18 +25,76 @@ func start_quiz():
 	if questionsList[indexQuestion] != null:
 		show()
 		show_question()
+		nextDay.disabled = true
 
 func show_question():
 	answerList.show()
 	checkButton.show()
-	answerList.clear() 
+	#answerList.clear() 
 	question = questionsList[indexQuestion]
 	questionLabel.text = question.TEXT
 	var answers = question.OPTIONS
 	answers.shuffle()
 	for answer in answers:
-		answerList.add_item(answer)
-	
+		# Erstelle einen Button für die Antwort
+		var button = Button.new()
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Button soll sich horizontal anpassen
+		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER  # Vertikales Schrumpfen und Zentrieren
+		button.flat = true  # Der Button sieht flach aus, ohne standardmäßiges Button-Design
+
+		# Erstelle ein Label für den Text der Antwort
+		var label = Label.new()
+		label.text = answer
+
+		# Aktiviert den Zeilenumbruch nach Wörtern
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD
+		#label.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Lässt das Label sich horizontal anpassen
+		label.grow_horizontal = Control.GROW_DIRECTION_BOTH  # Lässt das Label nach beiden Seiten wachsen
+		label.grow_vertical = Control.GROW_DIRECTION_BOTH  # Passt die Höhe dynamisch an den Text an
+
+		# Füge das Label in den Button ein
+		button.add_child(label)
+
+		# Setze den Button so, dass er seine Größe dynamisch an den Inhalt (Label) anpasst
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		#button.rect_min_size = Vector2(0, 0)  # Sicherstellen, dass der Button keine Mindestgröße hat
+
+		# Verbinde das Signal des Buttons
+		button.connect("pressed", Callable(self, "_on_answer_button_pressed").bind(answer))
+
+		# Füge den Button in die answerList (VBoxContainer) ein
+		answerList.add_child(button)
+
+		
+		##Container erstellen um Text unter einem Button hinzufügen. Workaround fix damit der Text besser lesbar ist.
+		#var answerContainer = VBoxContainer.new()
+		#
+		#var label = Label.new()
+		#label.text = answer
+		#label.autowrap_mode = TextServer.AUTOWRAP_WORD  # Aktiviert den automatischen Zeilenumbruch im Label. Die Funktion die es bei einer Auswahlliste leider nicht gibt
+		##label.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Lässt das Label sich horizontal anpassen  # Optional: Setzt eine Mindestgröße für das Label
+		#
+		## Erstelle einen Button, der den Text enthält und klickbar ist
+		#var button = Button.new()
+		#button.text = ""  # Der Button hat keinen Text, er ist nur ein klickbarer Bereich
+		##button.flat = true  # Entfernt die Umrandung des Buttons
+		#button.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Passt sich horizontal an den Container an
+		#button.size_flags_vertical = Control.SIZE_EXPAND_FILL  # Passt sich vertikal an den Container an
+		#button.connect("pressed", Callable(self, "_on_answer_button_pressed").bind(answer))  # Verbinde das "pressed"-Signal
+#
+		## Füge das Label und den Button in den VBoxContainer ein
+		#answerContainer.add_child(label)
+		#answerContainer.add_child(button)
+#
+		## Füge den VBoxContainer in die answerList (VBoxContainer) ein
+		#answerList.add_child(answerContainer)
+
+		# Füge den VBoxContainer in die answerList (VBoxContainer) ein
+		#answerList.add_child(container)
+		#answerList.add_item(answer)
+func _on_answer_button_pressed(answer: String):
+	answerGiven = answer  # Speichere die ausgewählte Antwort
 func read_json_file(filename: String) -> Array:
 	var file = FileAccess.open(filename, FileAccess.READ)
 	if file == null:
@@ -80,6 +139,7 @@ func _on_button_pressed():
 	hintText.hide()
 	indexQuestion += 1
 	button.hide()
+	nextDay.disabled = false
 	#TODO Buffs hinzufügen
 
 func _on_check_button_pressed():
