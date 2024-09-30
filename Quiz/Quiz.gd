@@ -22,7 +22,7 @@ func _ready():
 
 func start_quiz():
 	# zeigt keine Fragen mehr, wenn alle Fragen beantwortet worden sind
-	if indexQuestion <= questionsList.size(): 
+	if indexQuestion < questionsList.size(): 
 		if questionsList[indexQuestion] != null :
 			show()
 			show_question()
