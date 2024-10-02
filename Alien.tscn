@@ -38,7 +38,7 @@ texture = SubResource("AtlasTexture_c0unr")
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_koa4g")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17466")
+blackboard = NodePath("@Node@17944")
 actor = NodePath("..")
 
 [node name="PlaceSelector" type="Node" parent="BeehaveTree"]

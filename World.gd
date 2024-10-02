@@ -5,6 +5,8 @@ extends Node2D
 func _ready() -> void:
 	GlobalSignals.NewDayStarted.connect(_On_NewDay_Started)
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
+	GlobalSignals.StartQuiz.connect(_On_Start_Quiz)
+	GlobalSignals.EndQuiz.connect(_On_End_Quiz)
 	RoundManager.RoundLost.connect(_On_RoundLost)
 	RoundManager.RoundLostTree.connect(_On_RoundLostTree)
 
@@ -22,7 +24,16 @@ func _On_RoundLost() -> void:
 	
 func _On_RoundLostTree() -> void:
 	$CanvasLayer/LosePanel2.show()
-
+	
+func _On_Start_Quiz() -> void:
+	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
+	$CanvasLayer/Button.disabled = true
+	
+func _On_End_Quiz() -> void:
+	print("test")
+	#await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
+	$CanvasLayer/Button.disabled = false
+	
 #Sorgt dafür, das Gebäude an das Spielgitter "gesnapped" werden
 func _unhandled_input(event: InputEvent) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
