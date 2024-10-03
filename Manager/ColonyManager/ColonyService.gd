@@ -1,7 +1,6 @@
 extends Node
 
 #Eigentliches Herzstück des Ganzen, beinhaltet sämtliche Logik was passieren soll, wenn ein Tag startet, endet etc.
-#Balancing wurde noch nicht vorgenommen, weshalb das Spiel sehr unbalanced wirken kann
 
 var population: Array[Alien] = [load("res://Alien.tscn").instantiate(), load("res://Alien.tscn").instantiate(), load("res://Alien.tscn").instantiate(), load("res://Alien.tscn").instantiate()]
 var food: int = 25
@@ -13,8 +12,10 @@ var accommodations: Array[Accommodation]
 var usedEnergy: int = 0
 var activeEnergyStations: Array
 var activeFoodStations: Array
-@onready var tile_map = $"/root/World/WorldMap"
 
+@onready var tile_map = $"/root/World/WorldMap"
+@onready var buff_manager = %Buffmanager
+@onready var quiz = %Quiz
 
 var days: int = 0
 
@@ -74,8 +75,9 @@ func _On_DayEnded() -> void:
 	print("Runde: ", days)
 	# Ab 5 tagen = Frage aufploppen
 	if days % 1 == 0: # Change to 5 days
-		GlobalSignals.StartQuiz.emit()
-		print("QUIZ GO")
+		if quiz.indexQuestion < quiz.questionsList.size(): 
+			GlobalSignals.StartQuiz.emit()
+			print("QUIZ GO")
 	print("CO2: ", co2)
 	
 	#print(buildings)
@@ -119,7 +121,8 @@ func AssignWorkersToWorkstations() -> void:
 			if workplace.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY and !workplace.NeedsWorkers():
 				#if !activeEnergyStations.find(workplace):
 					#activeEnergyStations.append(workplace)
-				energy += workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+				var buff_energy = buff_manager.get_buff_value("ENERGY") * workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+				energy += round(buff_energy) + workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 
 func UpdateWorkstations() -> void:
 	var inactiveStations: Array = GetWorkStations().filter(
@@ -167,8 +170,10 @@ func UpdateResources() -> void:
 	#Sammelt die Ressourcen der aktiven Arbeitsplätze
 	for workstation: Workstation in activeWorkstations:
 		#energy += workstation.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
-		food += workstation.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
-		wood += workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
+		var buff_food = buff_manager.get_buff_value("FOOD") * workstation.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
+		var buff_wood = buff_manager.get_buff_value("WOOD") * workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
+		food += round(buff_food) + workstation.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
+		wood += round(buff_wood) + workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
 		countWoodProduction += workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
 		co2 += workstation.data.co2
 	var treeCounter: int = 0

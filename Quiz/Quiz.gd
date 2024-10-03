@@ -8,12 +8,15 @@ extends Control
 @onready var checkButton = $Panel/MarginContainer/VBoxContainer/CheckButton
 @onready var hintText = $Panel/MarginContainer/VBoxContainer/Hinttext
 @onready var nextDay = $CanvasLayer/Button
+@onready var buff_manager = %Buffmanager
+
 
 var file
 var questionsList: Array = read_json_file("Quiz/Questions.json")
 var question: Dictionary
 var indexQuestion: int = 0
 var answerGiven: String
+var active_buffs = {}
 
 func _ready():
 	hide()
@@ -70,6 +73,9 @@ func read_json_file(filename: String) -> Array:
 
 # Überprüft die Antworten und zieht die Texte von der json auf die Nodes, damit die sichtbar werden
 func check_answer():
+	var buff_type = question.BUFF
+	var buff_value = question.BUFFVALUE
+	var debuff_value = question.DEBUFFVALUE
 	if answerGiven == question.CORRECTANSWER:
 		var random_float = randf()
 		if random_float < 0.7:
@@ -77,8 +83,10 @@ func check_answer():
 			hintText.text = question.CORRECTRIVET
 		else:
 			# 30% chance auf Buff
+			buff_manager.apply_buff(buff_type, buff_value)
 			hintText.text = question.CORRECTANSWERTEXT
 	else:
+			buff_manager.apply_buff(buff_type, debuff_value)
 			hintText.text = question.WRONGANSWER 
 			
 		

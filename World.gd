@@ -30,8 +30,8 @@ func _On_Start_Quiz() -> void:
 	$CanvasLayer/Button.disabled = true
 	
 func _On_End_Quiz() -> void:
+	await get_tree().create_timer(0.5).timeout
 	print("test")
-	#await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
 	$CanvasLayer/Button.disabled = false
 	
 #Sorgt dafür, das Gebäude an das Spielgitter "gesnapped" werden

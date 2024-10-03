@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bsi2btyqwer3y"]
+[gd_scene load_steps=31 format=3 uid="uid://bsi2btyqwer3y"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_u2nyf"]
 [ext_resource type="TileSet" uid="uid://dll8h3a6qkx2o" path="res://Assets/tileset.tres" id="2_0q6lx"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Manager/ColonyManager/ColonyData.gd" id="10_rbojh"]
 [ext_resource type="Texture2D" uid="uid://b2gsq81ua5qqv" path="res://Assets/cloud.png" id="16_xufu3"]
 [ext_resource type="Script" path="res://Filter/Cloudparticle.gd" id="17_63vif"]
+[ext_resource type="Script" path="res://Buffs/Buffmanager.gd" id="21_0be68"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjgln"]
 atlas = ExtResource("7_pbgl5")
@@ -508,6 +509,10 @@ script = ExtResource("17_63vif")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/AnswerList")
+
+[node name="Buffmanager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("21_0be68")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="PlanetManager/PlanetService" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Analysis" method="_on_button_pressed"]

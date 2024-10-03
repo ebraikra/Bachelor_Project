@@ -6,7 +6,9 @@
 		"CORRECTANSWERTEXT": "Ja! Die Landwirtschaft fördern dies und nutzten es. Dadurch haben wir unsere Lebensmittelproduktion gesteigert",
 		"CORRECTRIVET": "Ja! Leider unterstützen die Landwirte dies nicht, da sie lieber auf Traditonelles Saatgut setzt.",
 		"WRONGANSWER": "Nein! Darauf sollten wir uns nicht konzentrieren. Unsere Lebensmittelproduktion verringert sich.",
-		"BUFF": "FOOD"
+		"BUFF": "FOOD",
+		"BUFFVALUE": 0.2,
+		"DEBUFFVALUE": -0.2
 	},
 	{
 		"TEXT": "Welche der folgenden Strategien wäre am effektivsten, um die Abholzung in tropischen Regenwäldern zu reduzieren, während gleichzeitig die wirtschaftliche Entwicklung der betroffenen Regionen gefördert wird?",
@@ -15,7 +17,9 @@
 		"CORRECTANSWERTEXT": "yes",
 		"CORRECTRIVET": "rivet",
 		"WRONGANSWER": "wrong answer",
-		"BUFF": "WOOD"
+		"BUFF": "WOOD",
+		"BUFFVALUE": 0.2,
+		"DEBUFFVALUE": -0.2
 	},
 	{
 		"TEXT": "Angesichts der komplexen Herausforderungen bei der Integration erneuerbarer Energien in bestehende Energiesysteme, welche Maßnahmen sollten vorrangig ergriffen werden, um die Netzstabilität zu gewährleisten und gleichzeitig die Dekarbonisierung des Energiesektors voranzutreiben?",
@@ -24,6 +28,8 @@
 		"CORRECTANSWERTEXT": "yes",
 		"CORRECTRIVET": "rivet",
 		"WRONGANSWER": "wrong answer",
-		"BUFF": "ENERGY"
-	},
+		"BUFF": "ENERGY",
+		"BUFFVALUE": 0.2,
+		"DEBUFFVALUE": -0.2
+	}
 ]
