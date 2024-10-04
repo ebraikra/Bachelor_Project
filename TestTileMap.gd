@@ -87,4 +87,3 @@ func GetAllEndings() -> Array:
 func GetAllTrees() -> Array:
 	return get_used_cells(1)
 	
-
