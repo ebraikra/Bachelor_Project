@@ -31,7 +31,6 @@ func _On_Start_Quiz() -> void:
 	
 func _On_End_Quiz() -> void:
 	await get_tree().create_timer(0.5).timeout
-	print("test")
 	$CanvasLayer/Button.disabled = false
 	
 #Sorgt dafür, das Gebäude an das Spielgitter "gesnapped" werden

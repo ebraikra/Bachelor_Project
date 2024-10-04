@@ -104,30 +104,33 @@ anchor_right = 0.5
 grow_horizontal = 2
 script = ExtResource("3_y8p6m")
 
-[node name="ResourcesContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ResourceInterface"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -52.0
-offset_right = 52.0
-offset_bottom = 40.0
+offset_left = -132.0
+offset_right = 132.0
+offset_bottom = 50.0
 grow_horizontal = 2
 
-[node name="FoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="ResourcesContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer"]
 layout_mode = 2
 
-[node name="FoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/FoodContainer"]
+[node name="FoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
+layout_mode = 2
+
+[node name="FoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/FoodContainer"]
 layout_mode = 2
 texture = ExtResource("4_dumw7")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="FoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/FoodContainer"]
+[node name="FoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/FoodContainer"]
 layout_mode = 2
 text = "100"
 
-[node name="FoodIndi" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/ResourcesContainer/FoodContainer"]
+[node name="FoodIndi" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/FoodContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -135,43 +138,66 @@ theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 fit_content = true
 
-[node name="EnergyContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="EnergyContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
 layout_mode = 2
 
-[node name="EnergyIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/EnergyContainer"]
+[node name="EnergyIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/EnergyContainer"]
 layout_mode = 2
 texture = ExtResource("5_84bw3")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="EnergyLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/EnergyContainer"]
+[node name="EnergyLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/EnergyContainer"]
 layout_mode = 2
 text = "10/10"
 
-[node name="WoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="WoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
 layout_mode = 2
 
-[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/WoodContainer"]
+[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/WoodContainer"]
 layout_mode = 2
 texture = ExtResource("6_vnvit")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="WoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/WoodContainer"]
+[node name="WoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/WoodContainer"]
 layout_mode = 2
 text = "100"
 
-[node name="AliensContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="AliensContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
 layout_mode = 2
 
-[node name="AlienIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/AliensContainer"]
+[node name="AlienIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/AliensContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_xjgln")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="AlienLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/AliensContainer"]
+[node name="AlienLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/AliensContainer"]
 layout_mode = 2
+
+[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="FoodBuffLabel" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/BuffContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "100"
+
+[node name="EnergyBuffLabel" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/BuffContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "10"
+
+[node name="WoodBuffLabel" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/BuffContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "100"
 
 [node name="Analysis" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true

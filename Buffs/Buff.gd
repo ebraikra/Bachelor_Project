@@ -10,4 +10,3 @@ func _init(_type: String, _value: float):
 	self.type = _type
 	self.value = _value
 #duration = _duration # Optional
-	# Called when the node enters the scene tree for the first time.
