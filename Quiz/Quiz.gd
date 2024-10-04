@@ -2,7 +2,7 @@ extends Control
 
 #Logik für das Quiz
 
-@onready var questionLabel = $Panel/MarginContainer/VBoxContainer/Questions
+@onready var questionLabel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/Questions
 @onready var answerList = $Panel/MarginContainer/VBoxContainer/AnswerList
 @onready var button = $Panel/MarginContainer/VBoxContainer/Button
 @onready var checkButton = $Panel/MarginContainer/VBoxContainer/CheckButton
@@ -49,6 +49,7 @@ func show_question():
 		# Anpassungen am Container
 		answerButton.size_flags_horizontal = Control.SIZE_EXPAND_FILL 
 		answerButton.size_flags_vertical = Control.SIZE_EXPAND_FILL  
+	$Panel/MarginContainer/VBoxContainer/HBoxContainer/Control/AlienScientist.play("speak")
 
 # Speichert die ausgewählte Antwort
 func _on_answerbutton_pressed(answer: String):
@@ -78,7 +79,7 @@ func check_answer():
 	var debuff_value = question.DEBUFFVALUE
 	if answerGiven == question.CORRECTANSWER:
 		var random_float = randf()
-		if random_float < 0.7:
+		if random_float < 0.1:
 			# 70% chance ist Niete
 			hintText.text = question.CORRECTRIVET
 		else:
