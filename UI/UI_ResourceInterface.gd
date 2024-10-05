@@ -30,7 +30,8 @@ func update_resource_labels() -> void:
 	# Berechne die voraussichtliche Nahrungsmenge
 	var food: int = 0
 	for fs: Workstation in %ColonyService.activeFoodStations: # Problema
-		food += fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
+		var buff_food = buff_manager.get_buff_value("FOOD") * fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
+		food += round(buff_food) + fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 	
 	var food_balance = food - %ColonyService.GetPopulation().size()
 	if food_balance <= 0:
