@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bsi2btyqwer3y"]
+[gd_scene load_steps=43 format=3 uid="uid://bsi2btyqwer3y"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_u2nyf"]
 [ext_resource type="TileSet" uid="uid://dll8h3a6qkx2o" path="res://Assets/tileset.tres" id="2_0q6lx"]
@@ -17,12 +17,20 @@
 [ext_resource type="Script" path="res://Manager/PlanetManager/PlanetService.gd" id="8_iwj4d"]
 [ext_resource type="Script" path="res://Quiz/Quiz.gd" id="9_lem08"]
 [ext_resource type="Script" path="res://Manager/ColonyManager/ColonyService.gd" id="9_ql7fa"]
+[ext_resource type="Texture2D" uid="uid://bma4br3lt31sc" path="res://Alien Scientist/hand heben.png" id="10_icknf"]
 [ext_resource type="Script" path="res://Manager/ColonyManager/ColonyData.gd" id="10_rbojh"]
+[ext_resource type="Texture2D" uid="uid://fo1cnrixfkju" path="res://Alien Scientist/neutral.png" id="12_4dtfg"]
+[ext_resource type="Texture2D" uid="uid://bpih88gd4f0r1" path="res://Alien Scientist/nicht gut.png" id="12_5uk5o"]
+[ext_resource type="Texture2D" uid="uid://52vokl37syel" path="res://Alien Scientist/hand heben traurig.png" id="13_u2xq8"]
+[ext_resource type="Texture2D" uid="uid://s44g7df2u0b0" path="res://Alien Scientist/hand heben sprechen.png" id="14_j1mxr"]
+[ext_resource type="Texture2D" uid="uid://dq7ivmwrlu05s" path="res://Alien Scientist/hand heben neutral.png" id="15_u2h3d"]
 [ext_resource type="Texture2D" uid="uid://b2gsq81ua5qqv" path="res://Assets/cloud.png" id="16_xufu3"]
 [ext_resource type="Script" path="res://Filter/Cloudparticle.gd" id="17_63vif"]
+[ext_resource type="Texture2D" uid="uid://nv8mrfqqgtt2" path="res://Alien Scientist/traurig.png" id="18_62b5r"]
+[ext_resource type="Texture2D" uid="uid://b5ibhsq5o77n" path="res://Alien Scientist/traurigunterwasser.webp" id="19_hiyi2"]
 [ext_resource type="Script" path="res://Buffs/Buffmanager.gd" id="21_0be68"]
-[ext_resource type="Texture2D" uid="uid://bq3ev10ojrvrx" path="res://Alien Scientist/freundlich.png" id="22_sj1ex"]
-[ext_resource type="Texture2D" uid="uid://gckujpvkmv43" path="res://Alien Scientist/sprechen.png" id="23_nc2ju"]
+[ext_resource type="Texture2D" uid="uid://7oxa07ugd4fq" path="res://Alien Scientist/freundlich.png" id="22_sj1ex"]
+[ext_resource type="Texture2D" uid="uid://c038l2st6yhq6" path="res://Alien Scientist/sprechen.png" id="23_nc2ju"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjgln"]
 atlas = ExtResource("7_pbgl5")
@@ -31,20 +39,587 @@ region = Rect2(0, 64, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ddp5r"]
 animations = [{
 "frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 4.0,
+"texture": ExtResource("12_5uk5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5uk5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_u2xq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 4.0,
+"texture": ExtResource("13_u2xq8")
+}, {
+"duration": 6.0,
+"texture": ExtResource("12_5uk5o")
+}],
+"loop": false,
+"name": &"analysis_bad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
 "duration": 1.0,
 "texture": ExtResource("22_sj1ex")
 }, {
 "duration": 1.0,
 "texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 8.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 6.0,
+"texture": ExtResource("22_sj1ex")
 }],
-"loop": true,
-"name": &"speak",
+"loop": false,
+"name": &"analysis_friendly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}],
+"loop": false,
+"name": &"analysis_neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 10.0,
+"texture": ExtResource("12_4dtfg")
+}],
+"loop": false,
+"name": &"quiz_neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 10.0,
+"texture": ExtResource("22_sj1ex")
+}],
+"loop": false,
+"name": &"quiz_speak",
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhhbe"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_1me3k"]
-font_size = 24
-outline_size = 5
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2axn"]
 size = Vector2(10, 10)
@@ -263,6 +838,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Analyse"
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -277,6 +853,7 @@ text = "Ok"
 
 [node name="Quiz" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -331,15 +908,14 @@ layout_mode = 2
 position = Vector2(55, 68)
 scale = Vector2(0.179598, 0.151639)
 sprite_frames = SubResource("SpriteFrames_ddp5r")
-animation = &"speak"
-frame_progress = 0.0849661
+animation = &"quiz_speak"
 
 [node name="Questions" type="Label" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(900, 140)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yhhbe")
 text = "Question"
 label_settings = SubResource("LabelSettings_1me3k")
-horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
@@ -411,6 +987,19 @@ text = "Unsere Spezies ist verhungert. "
 fit_content = true
 scroll_active = false
 
+[node name="Control" type="Control" parent="CanvasLayer/LosePanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LosePanel/MarginContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 73.0
+offset_right = 384.0
+offset_bottom = 363.0
+texture = ExtResource("18_62b5r")
+expand_mode = 1
+
 [node name="LosePanel2" type="Panel" parent="CanvasLayer"]
 visible = false
 anchors_preset = 8
@@ -457,6 +1046,19 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Der Planet wurde zerstört. Es gibt kein zurück mehr. Wir haben versagt."
 fit_content = true
 scroll_active = false
+
+[node name="Control" type="Control" parent="CanvasLayer/LosePanel2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LosePanel2/MarginContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 73.0
+offset_right = 384.0
+offset_bottom = 363.0
+texture = ExtResource("19_hiyi2")
+expand_mode = 1
 
 [node name="GreyFilter" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true

@@ -6,4 +6,3 @@ extends BuildingData
 
 @export var neededWorkers: int
 @export var produces: Dictionary = {BUILDINGCATEGORY.ENERGY: 1, BUILDINGCATEGORY.FOOD: 1, BUILDINGCATEGORY.WOOD: 1}
-
