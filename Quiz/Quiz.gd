@@ -92,7 +92,7 @@ func check_answer():
 		else:
 			# 30% chance auf Buff
 			buff_manager.apply_buff(buff_type, buff_value)
-			alienScientist.play("analysis_friendly")
+			alienScientist.play("quiz_friendly")
 			questionLabel.text = question.CORRECTANSWERTEXT
 	else:
 			buff_manager.apply_buff(buff_type, debuff_value)

@@ -75,6 +75,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}],
+"loop": false,
+"name": &"analysis_neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
 "texture": ExtResource("22_sj1ex")
 }, {
 "duration": 1.0,
@@ -189,39 +221,7 @@ animations = [{
 "texture": ExtResource("22_sj1ex")
 }],
 "loop": false,
-"name": &"analysis_friendly",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 5.0,
-"texture": ExtResource("12_4dtfg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_nc2ju")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_4dtfg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_u2h3d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_j1mxr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_u2h3d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_j1mxr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_u2h3d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_4dtfg")
-}],
-"loop": false,
-"name": &"analysis_neutral",
+"name": &"quiz_friendly",
 "speed": 5.0
 }, {
 "frames": [{
@@ -847,6 +847,16 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Control" type="Control" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Control"]
+position = Vector2(213, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"analysis_bad"
+
 [node name="Button" type="Button" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Ok"
@@ -908,7 +918,7 @@ layout_mode = 2
 position = Vector2(55, 68)
 scale = Vector2(0.179598, 0.151639)
 sprite_frames = SubResource("SpriteFrames_ddp5r")
-animation = &"quiz_speak"
+animation = &"analysis_bad"
 
 [node name="Questions" type="Label" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(900, 140)
@@ -983,7 +993,7 @@ layout_mode = 2
 [node name="LoseText" type="RichTextLabel" parent="CanvasLayer/LosePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
-text = "Unsere Spezies ist verhungert. "
+text = "Wir haben kein Essen mehr. Dadurch ist unsere Spezies verhungert."
 fit_content = true
 scroll_active = false
 
@@ -1043,7 +1053,9 @@ layout_mode = 2
 [node name="LoseText" type="RichTextLabel" parent="CanvasLayer/LosePanel2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
-text = "Der Planet wurde zerstört. Es gibt kein zurück mehr. Wir haben versagt."
+text = "Der Planet wurde zerstört. Es gibt kein zurück mehr. Wir haben versagt.
+Dadurch, dass es keine Bäume mehr gibt, die das CO2 aufnehmen können, wird sich der Planet weiter aufheizen und unbewohnbar sein. 
+Versuche beim nächsten Mal nicht zu viel aufeinmal zu produzieren. Baue nur das was nötig ist, damit der nächste Planet sich schneller erholen kann."
 fit_content = true
 scroll_active = false
 
@@ -1062,7 +1074,6 @@ expand_mode = 1
 
 [node name="GreyFilter" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 z_index = 1
 anchors_preset = 15
 anchor_right = 1.0

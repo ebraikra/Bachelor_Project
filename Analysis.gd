@@ -3,6 +3,7 @@ extends Control
 #Logik für den Analysebericht
 
 @onready var analyses = $Panel/MarginContainer/VBoxContainer/Analyses
+@onready var alienScientist = $Panel/MarginContainer/VBoxContainer/Control/AlienScientist
 var fileData
 var toAnalyze: Array = []
 
@@ -29,6 +30,10 @@ func StartNewAnalysis() -> void:
 		analyses.add_child(textLabel)
 		analyses.add_child(sep)
 		var data = str(GlobalSignals.ANALYSE.keys()[analysis])
+		if data == "CLOUDS_SPAWNING":
+			alienScientist.play("analysis_neutral")
+		if data == "TREE_NOT_SPAWNING":
+			alienScientist.play("analysis_bad")
 		textLabel.set_text(fileData.get(data).TEXT)
 		textLabel.fit_content = true
 	show()

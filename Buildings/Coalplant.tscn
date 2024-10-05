@@ -92,7 +92,8 @@ scale = Vector2(1.38984, 1.61446)
 sprite_frames = SubResource("SpriteFrames_pbkjw")
 animation = &"SmokeActive"
 autoplay = "SmokeActive"
-frame_progress = 0.427517
+frame = 3
+frame_progress = 0.143059
 
 [node name="InActiveWarning" type="Sprite2D" parent="."]
 visible = false
