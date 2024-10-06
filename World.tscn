@@ -1087,6 +1087,63 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.117647, 0.117647, 0.117647, 0)
 
+[node name="WinPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = -254.0
+offset_right = 254.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/WinPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "GESCHAFFT!"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WinText" type="RichTextLabel" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Du hast es geschafft. Jetzt gibt es ein Gleichgewicht und das Klima auf dem Planeten ist gerettet. Schaffst du es auch auf deinem eigenen Planeten?"
+fit_content = true
+scroll_active = false
+
+[node name="Control" type="Control" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer/Control"]
+position = Vector2(240, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"quiz_friendly"
+
 [node name="WorldMap" type="TileMap" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true

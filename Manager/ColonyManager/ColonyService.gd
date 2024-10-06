@@ -80,6 +80,11 @@ func _On_DayEnded() -> void:
 			print("QUIZ GO")
 	print("CO2: ", co2)
 	
+	#Win State
+	print("Bevölkerung: ", population.size())
+	print("Alle Bäume: ", tile_map.GetAllTrees().size())
+	if population.size() == 100 and co2 == 0 and tile_map.GetAllTrees().size() <= 300:
+		RoundManager.StartPhase(RoundManager.PHASES.ROUNDWON)
 	#print(buildings)
 
 #Ähnliche Logik zu oben, reagiert dieses mal nur darauf wenn ein Gebäude platziert wird

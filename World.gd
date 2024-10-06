@@ -9,6 +9,7 @@ func _ready() -> void:
 	GlobalSignals.EndQuiz.connect(_On_End_Quiz)
 	RoundManager.RoundLost.connect(_On_RoundLost)
 	RoundManager.RoundLostTree.connect(_On_RoundLostTree)
+	RoundManager.RoundWon.connect(_On_RoundWon)
 
 #Deaktiviert den "Neuer Tag" Button, um potentiellen Fehlern entgegen zu wirken
 func _On_NewDay_Started() -> void:
@@ -24,7 +25,10 @@ func _On_RoundLost() -> void:
 	
 func _On_RoundLostTree() -> void:
 	$CanvasLayer/LosePanel2.show()
-	
+
+func _On_RoundWon() -> void:
+	$CanvasLayer/WinPanel.show()
+
 func _On_Start_Quiz() -> void:
 	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
 	$CanvasLayer/Button.disabled = true
