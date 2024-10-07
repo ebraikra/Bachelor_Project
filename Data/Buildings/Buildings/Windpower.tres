@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WorkplaceData" load_steps=4 format=3 uid="uid://c7ues6f4jmvwh"]
+
+[ext_resource type="PackedScene" uid="uid://bxjcyygms0ygb" path="res://Buildings/Windpower.tscn" id="1_qvprr"]
+[ext_resource type="Script" path="res://Data/Buildings/WorkplaceData.gd" id="2_7obmc"]
+[ext_resource type="Texture2D" uid="uid://dvveqhl4sowwt" path="res://Assets/Windkraftwerk/windpowerplant.png" id="3_qh2no"]
+
+[resource]
+script = ExtResource("2_7obmc")
+neededWorkers = 1
+produces = {
+0: 5,
+1: 0,
+2: 0
+}
+name = "Windpower"
+texture = ExtResource("3_qh2no")
+description = ""
+buildingNode = ExtResource("1_qvprr")
+buildingCategory = 0
+buildingCost = 15
+energyCost = 0
+co2 = 0

@@ -32,6 +32,7 @@ func _ready() -> void:
 	GlobalSignals.BuildingPlaced.connect(_On_BuildingPlaced)
 	GlobalSignals.NewDayStarted.connect(_On_NewDayStarted)
 	GlobalSignals.DayEnded.connect(_On_DayEnded)
+	#GlobalSignals.EndQuiz.connect(_On_QuizEnded)
 	#GlobalSignals.BuildingRemoved.connect(_On_Building_Removed)
 	for building in buildings:
 		building.connect("building_remove", Callable(self, "_On_Building_Removed")) 
@@ -64,6 +65,7 @@ func _On_DayEnded() -> void:
 	UpdateWorkstations()
 	# Aktualisiere Ressourcen basierend auf aktiven Arbeitsplätzen
 	UpdateResources()
+	
 	#Fix wenn alle Gebäude gelöscht werden, geht das ins Minus
 	if usedEnergy <= 0: usedEnergy = 0
 	#Leitet den Lose-Screen ein, wenn die Nahrung <= 0 gesunken ist
@@ -83,7 +85,7 @@ func _On_DayEnded() -> void:
 	#Win State
 	print("Bevölkerung: ", population.size())
 	print("Alle Bäume: ", tile_map.GetAllTrees().size())
-	if population.size() == 100 and co2 == 0 and tile_map.GetAllTrees().size() <= 300:
+	if population.size() == 100 and co2 == 0 and tile_map.GetAllTrees().size() <= 300: #Game Goal
 		RoundManager.StartPhase(RoundManager.PHASES.ROUNDWON)
 	#print(buildings)
 
@@ -98,6 +100,7 @@ func _On_BuildingPlaced(building: Node2D) -> void:
 	 # Arbeitsplätze auffüllen
 	UpdateWorkstations()
 	update_activeFoodStations(activeWorkstations)
+
 				
 func AssignWorkersToWorkstations() -> void:
 	if %Spaceship.residents.size() > 0:
@@ -123,11 +126,17 @@ func AssignWorkersToWorkstations() -> void:
 				else:
 					for i: int in workplace.GetNeededWorkersAmount():
 						workplace.AddWorker(GetResidentsWithoutJob().pop_front())
+						
 			if workplace.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY and !workplace.NeedsWorkers():
-				#if !activeEnergyStations.find(workplace):
-					#activeEnergyStations.append(workplace)
 				var buff_energy = buff_manager.get_buff_value("ENERGY") * workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 				energy += round(buff_energy) + workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+				
+			if workplace is Solarpanel:
+				print("Schleife name solarpanel")
+				if !workplace.IsAlreadyPlaced():
+					print("schleife platzierung")
+					var buff_energy = buff_manager.get_buff_value("ENERGY") * workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+					energy += round(buff_energy) + workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 
 func UpdateWorkstations() -> void:
 	var inactiveStations: Array = GetWorkStations().filter(
@@ -249,6 +258,11 @@ func getLumberjacks() -> Array:
 		func(building: Node2D) -> bool:
 			return building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.WOOD
 	)
+func getEnergystations() -> Array:
+	return buildings.filter(
+		func(building: Node2D) -> bool:
+			return building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY
+	)
 	
 #Rückgabe aller Wohneinheiten
 func GetAccommodations() -> Array:
@@ -317,3 +331,9 @@ func GetResidentWithJob() -> Array:
 		func(resident: Alien) -> bool:
 			return resident.GetWorkplace() != null
 	)
+
+func getEnergy():
+	return energy
+	
+func setEnergy(value):
+	energy = value

@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=3 uid="uid://bxjcyygms0ygb"]
+
+[ext_resource type="Script" path="res://Buildings/Windpower.gd" id="1_xojmb"]
+[ext_resource type="Texture2D" uid="uid://c27dovnpdhrdj" path="res://Assets/Windkraftwerk/windkraftwerk.png" id="2_cfgk5"]
+[ext_resource type="Texture2D" uid="uid://cjeihcixoxxwx" path="res://Assets/Highlighted-Boxes.png" id="3_kt4sc"]
+[ext_resource type="Texture2D" uid="uid://b0u8is1lbejwl" path="res://Assets/Windkraftwerk/rotorIdle.png" id="4_n1nju"]
+[ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="5_2nipd"]
+[ext_resource type="Texture2D" uid="uid://mxg8p3y77t6o" path="res://Assets/Windkraftwerk/rotor3.png" id="5_v84vw"]
+[ext_resource type="Texture2D" uid="uid://3pa5u2h4upe7" path="res://Assets/Windkraftwerk/rotor2.png" id="6_i5mww"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
+size = Vector2(32, 38)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0iko3"]
+texture = ExtResource("3_kt4sc")
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/4 = 4
+0:0/4/modulate = Color(0, 0, 0, 1)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wxi6i"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_0iko3")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iexho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_n1nju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v84vw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i5mww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n1nju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v84vw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i5mww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n1nju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v84vw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i5mww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n1nju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v84vw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i5mww")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}]
+
+[node name="Windpower" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+script = ExtResource("1_xojmb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_jhlbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
+texture = ExtResource("2_cfgk5")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-48, 16, -48, -16, -32, -16, -32, -32, -16, -32, -16, -48, 16, -48, 16, -32, 32, -32, 32, -16, 48, -16, 48, 16, 32, 16, 32, 32, 16, 32, 16, 48, -16, 48, -16, 32, -32, 32, -32, 16)
+
+[node name="Tiles" type="TileMap" parent="."]
+visible = false
+tile_set = SubResource("TileSet_wxi6i")
+format = 2
+layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 0, 0, -65537, 0, 0, -65538, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, -196610, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -262144, 0, 0, -196609, 0, 0, 131070, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 65536, 0, 0, 131071, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, -131075, 0, 0, -196607, 0, 0, 65537, 0, 0, 131069, 0, 0)
+
+[node name="Rotor" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -18)
+sprite_frames = SubResource("SpriteFrames_iexho")
+animation = &"active"
+frame_progress = 0.954504
+
+[node name="InActiveWarning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.08525, 0.08525)
+texture = ExtResource("5_2nipd")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

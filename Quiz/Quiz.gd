@@ -10,6 +10,7 @@ extends Control
 @onready var nextDay = $CanvasLayer/Button
 @onready var buff_manager = %Buffmanager
 @onready var alienScientist = $Panel/MarginContainer/VBoxContainer/HBoxContainer/Control/AlienScientist
+@onready var colony_service = %ColonyService
 
 
 var file
@@ -78,11 +79,12 @@ func check_answer():
 	var buff_type = question.BUFF
 	var buff_value = question.BUFFVALUE
 	var debuff_value = question.DEBUFFVALUE
+	var applied_buff = false
 	if answerGiven == question.CORRECTANSWER:
 		var random_float = randf()
 		if random_float < 0.01:
 			# 1% chance auf besondere Belohnung
-			buff_manager.apply_buff(buff_type, 3)
+			applied_buff = buff_manager.apply_buff(buff_type, 3)
 			alienScientist.play("quiz_speak")
 			questionLabel.text = "Unglaublich! Die Bevölkerung sieht es genauso und ist sich einig. Die Produktion wird sehr stark ansteigen"
 		elif random_float < 0.71:
@@ -91,13 +93,20 @@ func check_answer():
 			questionLabel.text = question.CORRECTRIVET
 		else:
 			# 30% chance auf Buff
-			buff_manager.apply_buff(buff_type, buff_value)
+			applied_buff = buff_manager.apply_buff(buff_type, buff_value)
 			alienScientist.play("quiz_friendly")
 			questionLabel.text = question.CORRECTANSWERTEXT
 	else:
-			buff_manager.apply_buff(buff_type, debuff_value)
+			applied_buff = buff_manager.apply_buff(buff_type, debuff_value)
 			alienScientist.play("quiz_neutral")
 			questionLabel.text = question.WRONGANSWER 
+			
+	if buff_type == "ENERGY":
+		if applied_buff:
+			var changeEnergy = colony_service.getEnergy()
+			changeEnergy += changeEnergy * buff_manager.get_buff_value("ENERGY")
+			print("changeEnergy:", changeEnergy)
+			colony_service.setEnergy(changeEnergy)
 			
 		
 func show_result():

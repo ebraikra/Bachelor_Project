@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4sal38gvgsl8"]
+
+[ext_resource type="Script" path="res://Buildings/Solarpanel.gd" id="1_ecb2m"]
+[ext_resource type="Texture2D" uid="uid://car5fc0p554ed" path="res://Assets/Solarpanel.png" id="2_yvncb"]
+[ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="4_0xnbj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
+size = Vector2(16, 16)
+
+[sub_resource type="TileSet" id="TileSet_p1ewo"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 2
+
+[node name="Solarpanel" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+script = ExtResource("1_ecb2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jhlbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yvncb")
+region_rect = Rect2(0.118546, -0.0555449, 63.0218, 64.1585)
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-48, 16, -48, -16, -32, -16, -32, -32, -16, -32, -16, -48, 16, -48, 16, -32, 32, -32, 32, -16, 48, -16, 48, 16, 32, 16, 32, 32, 16, 32, 16, 48, -16, 48, -16, 32, -32, 32, -32, 16)
+disabled = true
+
+[node name="Tiles" type="TileMap" parent="."]
+visible = false
+position = Vector2(8, 8)
+tile_set = SubResource("TileSet_p1ewo")
+format = 2
+layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 0, 0, -65537, 0, 0, -65538, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, -196610, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -262144, 0, 0, -196609, 0, 0, 131070, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 65536, 0, 0, 131071, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, -131075, 0, 0, -196607, 0, 0, 65537, 0, 0, 131069, 0, 0)
+
+[node name="InActiveWarning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.08525, 0.08525)
+texture = ExtResource("4_0xnbj")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]
