@@ -84,10 +84,9 @@ func _On_DayEnded() -> void:
 	print("CO2: ", co2)
 	
 	#Win State
-	print("Bevölkerung: ", population.size())
-	print("Alle Bäume: ", tile_map.GetAllTrees().size())
-	if population.size() == 100 and co2 == 0 and tile_map.GetAllTrees().size() <= 300: #Game Goal
+	if GetPopulation().size() >= 100 and co2 == 0 and tile_map.GetAllTrees().size() >= 300: #Game Goal
 		RoundManager.StartPhase(RoundManager.PHASES.ROUNDWON)
+		%AlienScientist.play("quiz_friendly")
 	#print(buildings)
 
 #Ähnliche Logik zu oben, reagiert dieses mal nur darauf wenn ein Gebäude platziert wird
