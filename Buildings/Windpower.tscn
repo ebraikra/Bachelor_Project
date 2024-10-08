@@ -106,7 +106,7 @@ layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_iexho")
 animation = &"active"
-frame_progress = 0.088562
+frame_progress = 0.0594212
 
 [node name="InActiveWarning" type="Sprite2D" parent="."]
 visible = false
