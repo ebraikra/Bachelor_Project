@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://s53b0c1cc2ns"]
 
-[ext_resource type="Script" path="res://Buildings/Lumberjack.gd" id="1_t6ehe"]
+[ext_resource type="Script" path="res://Buildings/Coalplant.gd" id="1_lft71"]
 [ext_resource type="Texture2D" uid="uid://c0prmybt0corq" path="res://Assets/TileSet.png" id="2_s1bpf"]
 [ext_resource type="Texture2D" uid="uid://cjp4gslmona38" path="res://Assets/SmokeAndFire.png" id="4_bc4bn"]
 [ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="4_sjx87"]
@@ -59,7 +59,7 @@ animations = [{
 collision_layer = 2
 collision_mask = 2
 input_pickable = true
-script = ExtResource("1_t6ehe")
+script = ExtResource("1_lft71")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jhlbd")

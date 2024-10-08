@@ -13,9 +13,9 @@ resource_name = "Coalplant"
 script = ExtResource("2_sle3x")
 neededWorkers = 2
 produces = {
-0: 15,
+0: 25,
 1: 0,
-2: 0
+2: -1
 }
 name = "Kohlekraftwerk"
 texture = SubResource("AtlasTexture_soavq")
@@ -24,4 +24,4 @@ buildingNode = ExtResource("1_ia6xq")
 buildingCategory = 0
 buildingCost = 20
 energyCost = 0
-co2 = 100
+co2 = 150
