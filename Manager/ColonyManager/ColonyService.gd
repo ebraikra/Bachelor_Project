@@ -77,7 +77,7 @@ func _On_DayEnded() -> void:
 	days += 1
 	print("Runde: ", days)
 	# Ab 5 tagen = Frage aufploppen
-	if days % 1 == 0: # Change to 5 days
+	if days % 5 == 0: # Change to 5 days
 		if quiz.indexQuestion < quiz.questionsList.size(): 
 			GlobalSignals.StartQuiz.emit()
 			print("QUIZ GO")
