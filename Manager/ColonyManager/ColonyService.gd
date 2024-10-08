@@ -4,7 +4,7 @@ extends Node
 
 var population: Array[Alien] = [load("res://Alien.tscn").instantiate(), load("res://Alien.tscn").instantiate(), load("res://Alien.tscn").instantiate(), load("res://Alien.tscn").instantiate()]
 var food: int = 25
-var wood: int = 150
+var wood: int = 90
 var energy: int = 0
 var co2: int = 0
 var buildings: Array
@@ -68,6 +68,7 @@ func _On_DayEnded() -> void:
 	
 	#Fix wenn alle Gebäude gelöscht werden, geht das ins Minus
 	if usedEnergy <= 0: usedEnergy = 0
+	if wood <= 0: wood = 0
 	#Leitet den Lose-Screen ein, wenn die Nahrung <= 0 gesunken ist
 	if food <= 0:
 		RoundManager.StartPhase(RoundManager.PHASES.LOSEROUND)
@@ -130,11 +131,10 @@ func AssignWorkersToWorkstations() -> void:
 			if workplace.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY and !workplace.NeedsWorkers():
 				var buff_energy = buff_manager.get_buff_value("ENERGY") * workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 				energy += round(buff_energy) + workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+				workplace.SetActive(true)
 				
 			if workplace is Solarpanel:
-				print("Schleife name solarpanel")
 				if !workplace.IsAlreadyPlaced():
-					print("schleife platzierung")
 					var buff_energy = buff_manager.get_buff_value("ENERGY") * workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 					energy += round(buff_energy) + workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 
