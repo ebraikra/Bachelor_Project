@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bsi2btyqwer3y"]
+[gd_scene load_steps=45 format=3 uid="uid://bsi2btyqwer3y"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_u2nyf"]
 [ext_resource type="TileSet" uid="uid://dll8h3a6qkx2o" path="res://Assets/tileset.tres" id="2_0q6lx"]
@@ -31,6 +31,8 @@
 [ext_resource type="Script" path="res://Buffs/Buffmanager.gd" id="21_0be68"]
 [ext_resource type="Texture2D" uid="uid://7oxa07ugd4fq" path="res://Alien Scientist/freundlich.png" id="22_sj1ex"]
 [ext_resource type="Texture2D" uid="uid://c038l2st6yhq6" path="res://Alien Scientist/sprechen.png" id="23_nc2ju"]
+[ext_resource type="AudioStream" uid="uid://bbv50b56vyb55" path="res://Music/Equatorial Complex(bearbeitet).mp3" id="32_37a7a"]
+[ext_resource type="AudioStream" uid="uid://b54lcss8cmcll" path="res://Music/Morgana Rides.mp3" id="33_pkygw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjgln"]
 atlas = ExtResource("7_pbgl5")
@@ -855,7 +857,7 @@ layout_mode = 2
 position = Vector2(213, 68)
 scale = Vector2(0.179598, 0.151639)
 sprite_frames = SubResource("SpriteFrames_ddp5r")
-animation = &"analysis_bad"
+animation = &"quiz_friendly"
 
 [node name="Button" type="Button" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1139,6 +1141,7 @@ custom_minimum_size = Vector2(116, 150)
 layout_mode = 2
 
 [node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
 position = Vector2(240, 68)
 scale = Vector2(0.179598, 0.151639)
 sprite_frames = SubResource("SpriteFrames_ddp5r")
@@ -1239,6 +1242,17 @@ script = ExtResource("17_63vif")
 [node name="Buffmanager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("21_0be68")
+
+[node name="Backgroundmusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("32_37a7a")
+autoplay = true
+parameters/looping = false
+
+[node name="BackgroundmusicChanged" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("33_pkygw")
+parameters/looping = false
 
 [connection signal="pressed" from="CanvasLayer/Button" to="PlanetManager/PlanetService" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Analysis" method="_on_button_pressed"]

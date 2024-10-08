@@ -74,6 +74,14 @@ func adjust_wood_based_on_co2() -> void:
 		if !alreadyAnalysed: 
 			GlobalSignals.AddAnalysis.emit(GlobalSignals.ANALYSE.TREE_NOT_SPAWNING)
 			alreadyAnalysed = true
+			%AlienScientist.play("analysis_bad")
+		%Backgroundmusic.stop()
+		if !%BackgroundmusicChanged.playing:
+			%BackgroundmusicChanged.play()
+	else:
+		%BackgroundmusicChanged.stop()
+		if !%Backgroundmusic.playing:
+			%Backgroundmusic.play()
 
 #Rückgabe aller "Enden" eines Waldes, also nur die äußersten Bäume werden returned
 func GetAllEndings() -> Array:
