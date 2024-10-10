@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxjcyygms0ygb"]
+[gd_scene load_steps=13 format=3 uid="uid://bxjcyygms0ygb"]
 
 [ext_resource type="Script" path="res://Buildings/Windpower.gd" id="1_xojmb"]
 [ext_resource type="Texture2D" uid="uid://c27dovnpdhrdj" path="res://Assets/Windkraftwerk/windkraftwerk.png" id="2_cfgk5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="5_2nipd"]
 [ext_resource type="Texture2D" uid="uid://mxg8p3y77t6o" path="res://Assets/Windkraftwerk/rotor3.png" id="5_v84vw"]
 [ext_resource type="Texture2D" uid="uid://3pa5u2h4upe7" path="res://Assets/Windkraftwerk/rotor2.png" id="6_i5mww"]
+[ext_resource type="Texture2D" uid="uid://c1ephy8xm8v1x" path="res://Assets/FarmerWarning.png" id="8_uwp0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
 size = Vector2(32, 38)
@@ -106,13 +107,19 @@ layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_iexho")
 animation = &"active"
-frame_progress = 0.379428
+frame_progress = 0.878756
 
 [node name="InActiveWarning" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -18)
 scale = Vector2(0.08525, 0.08525)
 texture = ExtResource("5_2nipd")
+
+[node name="NeedWorkers" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, -32)
+scale = Vector2(1.60619, 1.98368)
+texture = ExtResource("8_uwp0c")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

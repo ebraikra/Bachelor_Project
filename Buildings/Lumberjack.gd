@@ -15,6 +15,7 @@ var active: bool = false
 @onready var tileMap: TileMap = $Tiles
 @onready var chimney: AnimatedSprite2D = $Chimney
 @onready var inactive_warning: Sprite2D = $InActiveWarning
+@onready var needworkers_warning: Sprite2D = $NeedWorkers
 
 func _ready() -> void:
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)

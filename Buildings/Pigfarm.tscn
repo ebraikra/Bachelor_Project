@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb5u0c8dvehs"]
+[gd_scene load_steps=16 format=3 uid="uid://bb5u0c8dvehs"]
 
 [ext_resource type="Script" path="res://Buildings/Pigfarm.gd" id="1_rpmvf"]
 [ext_resource type="Texture2D" uid="uid://beca4mn8toqu6" path="res://Assets/Barracks.png" id="2_a8m1f"]
 [ext_resource type="Texture2D" uid="uid://cjeihcixoxxwx" path="res://Assets/Highlighted-Boxes.png" id="2_k8i1t"]
 [ext_resource type="Texture2D" uid="uid://r6ibepi47nxd" path="res://Assets/Pig.png" id="5_pn168"]
 [ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="5_wx0vr"]
+[ext_resource type="Texture2D" uid="uid://c1ephy8xm8v1x" path="res://Assets/FarmerWarning.png" id="6_klcsi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
 size = Vector2(32, 16)
@@ -122,6 +123,12 @@ visible = false
 position = Vector2(0, -18)
 scale = Vector2(0.08525, 0.08525)
 texture = ExtResource("5_wx0vr")
+
+[node name="NeedWorkers" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(6, -25)
+scale = Vector2(1, 1.2)
+texture = ExtResource("6_klcsi")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
