@@ -1,0 +1,223 @@
+[gd_scene load_steps=26 format=3 uid="uid://dur6bp83bo0vd"]
+
+[ext_resource type="Script" path="res://Buildings/Plantfarm.gd" id="1_05mm1"]
+[ext_resource type="Texture2D" uid="uid://cv0y5ivcnoai8" path="res://Assets/Plantfarm.webp" id="2_00k8j"]
+[ext_resource type="Texture2D" uid="uid://cjeihcixoxxwx" path="res://Assets/Highlighted-Boxes.png" id="3_746yt"]
+[ext_resource type="Texture2D" uid="uid://bmicuuj4diqj4" path="res://Assets/FarmerRed.png" id="4_184sg"]
+[ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="5_aybsa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
+size = Vector2(63, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0iko3"]
+texture = ExtResource("3_746yt")
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/4 = 4
+0:0/4/modulate = Color(0, 0, 0, 1)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wxi6i"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_0iko3")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwmww"]
+atlas = ExtResource("4_184sg")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k47r"]
+atlas = ExtResource("4_184sg")
+region = Rect2(16, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtvec"]
+atlas = ExtResource("4_184sg")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iexho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwmww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k47r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtvec")
+}],
+"loop": true,
+"name": &"work",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qwij"]
+atlas = ExtResource("4_184sg")
+region = Rect2(0, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fula7"]
+atlas = ExtResource("4_184sg")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plqhn"]
+atlas = ExtResource("4_184sg")
+region = Rect2(32, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_28pwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qwij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fula7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plqhn")
+}],
+"loop": true,
+"name": &"work",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2xeq"]
+atlas = ExtResource("4_184sg")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43wkl"]
+atlas = ExtResource("4_184sg")
+region = Rect2(0, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h635l"]
+atlas = ExtResource("4_184sg")
+region = Rect2(16, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sab0c"]
+atlas = ExtResource("4_184sg")
+region = Rect2(32, 160, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c5qed"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2xeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43wkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h635l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sab0c")
+}],
+"loop": true,
+"name": &"work",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xxir"]
+atlas = ExtResource("4_184sg")
+region = Rect2(0, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbied"]
+atlas = ExtResource("4_184sg")
+region = Rect2(16, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejr05"]
+atlas = ExtResource("4_184sg")
+region = Rect2(32, 176, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_can5b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xxir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbied")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejr05")
+}],
+"loop": true,
+"name": &"work",
+"speed": 5.0
+}]
+
+[node name="Plantfarm" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+script = ExtResource("1_05mm1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_jhlbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.496, 0.5)
+texture = ExtResource("2_00k8j")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-48, 16, -48, -16, -32, -16, -32, -32, -16, -32, -16, -48, 16, -48, 16, -32, 32, -32, 32, -16, 48, -16, 48, 16, 32, 16, 32, 32, 16, 32, 16, 48, -16, 48, -16, 32, -32, 32, -32, 16)
+
+[node name="Tiles" type="TileMap" parent="."]
+visible = false
+position = Vector2(8, 8)
+tile_set = SubResource("TileSet_wxi6i")
+format = 2
+layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 0, 0, -65537, 0, 0, -65538, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, -196610, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -262144, 0, 0, -196609, 0, 0, 131070, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 65536, 0, 0, 131071, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, -131075, 0, 0, -196607, 0, 0, 65537, 0, 0, 131069, 0, 0)
+
+[node name="Farmer1" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(16, -10)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_iexho")
+animation = &"work"
+frame = 2
+frame_progress = 1.0
+
+[node name="InActiveWarning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.08525, 0.08525)
+texture = ExtResource("5_aybsa")
+
+[node name="Farmer2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-6, 21)
+scale = Vector2(0.444, 0.5)
+sprite_frames = SubResource("SpriteFrames_28pwc")
+animation = &"work"
+frame_progress = 0.566878
+
+[node name="Farmer3" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-9, -32)
+scale = Vector2(0.444, 0.5)
+sprite_frames = SubResource("SpriteFrames_c5qed")
+animation = &"work"
+frame_progress = 0.541107
+
+[node name="Farmer4" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(17, 13)
+scale = Vector2(0.444, 0.5)
+sprite_frames = SubResource("SpriteFrames_can5b")
+animation = &"work"
+frame_progress = 0.173831
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

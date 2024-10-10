@@ -245,6 +245,10 @@ func _On_Building_Removed(building: Node2D) -> void:
 			UpdateWorkstations()
 			update_activeFoodStations(activeWorkstations)
 			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
+	print("Wood", wood)
+	print("Energy", energy)
+	print("usedEnergy", usedEnergy)
+	print("food", food)
 	
 	
 	

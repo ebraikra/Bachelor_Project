@@ -47,6 +47,7 @@ func update_co2(co2_value: int) -> void:
 		if !alreadyAnalysed:
 			GlobalSignals.AddAnalysis.emit(GlobalSignals.ANALYSE.CLOUDS_SPAWNING)
 			alreadyAnalysed = true
+			%AlienScientist.play("analysis_neutral")
 
 		# Tween-Effekte basierend auf dem gefundenen Index
 		var tween: Tween = get_tree().create_tween()
