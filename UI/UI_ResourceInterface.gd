@@ -17,15 +17,18 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
 	GlobalSignals.BuildingPlaced.connect(_On_Building_Placed)
+	GlobalSignals.BuildingRemoved.connect(_On_Building_Removed)
 	GlobalSignals.EndQuiz.connect(_On_End_Quiz)
-	update_resource_labels()
+	var production_food = 0
+	var production_energy = 0
+	update_resource_labels(production_food, production_energy)
 	update_buff_labels()
 
-func update_resource_labels() -> void:
+func update_resource_labels(production_food, production_energy) -> void:
 	# Aktualisiere die Labels mit den aktuellen Werten aus ColonyService
 	food_label.text = str(%ColonyService.food)
 	wood_label.text = str(%ColonyService.wood)
-	energy_label.text = "%s/%s" % [%ColonyService.usedEnergy, %ColonyService.energy]
+	energy_label.text = "%s/%s" % [ production_energy + %ColonyService.usedEnergy, %ColonyService.energy]
 
 	# Berechne die voraussichtliche Nahrungsmenge
 	var food: int = 0
@@ -33,7 +36,7 @@ func update_resource_labels() -> void:
 		var buff_food = buff_manager.get_buff_value("FOOD") * fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 		food += round(buff_food) + fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 	
-	var food_balance = food - %ColonyService.GetPopulation().size()
+	var food_balance = production_food + food - %ColonyService.GetPopulation().size()
 	if food_balance <= 0:
 		food_indi.text = "[center][p align=center][color=red]" + str(food_balance - 2)
 	else:
@@ -77,22 +80,30 @@ func update_buff_labels():
 
 func _On_Building_Placed(building: Node) -> void:
 	await get_tree().create_timer(1).timeout
-	update_resource_labels()
+	var production_food = 0
+	var production_energy = 0
+	if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD:
+		production_food = building.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
+		update_resource_labels(production_food, production_energy)
+	update_resource_labels(production_food, production_energy)
 
-func _On_Building_Removed() -> void:
+func _On_Building_Removed(building: Node) -> void:
 	await get_tree().create_timer(0.5).timeout
-	food_label.text = str(%ColonyService.food)
-	wood_label.text = str(%ColonyService.wood)
-	energy_label.text = "%s/%s" %  [%ColonyService.usedEnergy, %ColonyService.energy]
-	match %ColonyService.food - %ColonyService.GetPopulation().size() <= 0:
-		false:
-			food_indi.text = "[color=green][center][p align=center]++"
-		true:
-			food_indi.text = "[color=red][center][p align=center]--"
+	var production_food = 0
+	var production_energy = 0
+	#if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD:
+		#production_food = -building.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
+		#update_resource_labels(production_food, production_energy)
+	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:
+		production_energy = -building.data.energyCost
+		update_resource_labels(production_food, production_energy)
+	update_resource_labels(production_food, production_energy)
 
 func _On_Day_Ended() -> void:
 	await get_tree().create_timer(0.5).timeout
-	update_resource_labels()
+	var production_food = 0
+	var production_energy = 0
+	update_resource_labels(production_food, production_energy)
 	
 func _On_End_Quiz() -> void:
 	await get_tree().create_timer(0.5).timeout

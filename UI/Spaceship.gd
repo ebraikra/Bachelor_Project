@@ -11,7 +11,7 @@ const ALIEN = preload("res://Alien.tscn")
 func _ready() -> void:
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
 	GlobalSignals.BuildingPlaced.connect(_On_Building_Placed)
-	GlobalSignals.BuildingRemoved.connect(_On_Building_Removed)
+#	GlobalSignals.BuildingRemoved.connect(_On_Building_Removed)
 	residents = %ColonyService.population
 	for resident in residents:
 		%Colony.add_child(resident)
@@ -23,12 +23,12 @@ func _ready() -> void:
 		res_panel.hide()
 
 #Codeleiche
-func _On_Building_Removed(building: Node2D) -> void:
-	if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.MISC:
-		for resident: Alien in building.residents:
-			residents.append(resident)
-			resident.position = position
-			resident.show()
+#func _On_Building_Removed(building: Node2D) -> void:
+	#if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.MISC:
+		#for resident: Alien in building.residents:
+			#residents.append(resident)
+			#resident.position = position
+			#resident.show()
 
 #Erzeugt zwei neue NPCs am Ende eines Tages
 func _On_Day_Ended() -> void:

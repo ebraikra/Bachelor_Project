@@ -216,6 +216,8 @@ func _On_Building_Removed(building: Node2D) -> void:
 	if building == null:
 		print("Error: Trying to remove a null building!")  # Debugging
 		return
+	GlobalSignals.BuildingRemoved.emit(building)
+	await get_tree().create_timer(1).timeout
 	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:
 		if building in buildings:
 			print("Removing building: ", building.data.buildingCategory)
