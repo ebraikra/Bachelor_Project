@@ -136,6 +136,11 @@ func AssignWorkersToWorkstations() -> void:
 				if !workplace.IsAlreadyPlaced():
 					var buff_energy = buff_manager.get_buff_value("ENERGY") * workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
 					energy += round(buff_energy) + workplace.data.produces[BuildingData.BUILDINGCATEGORY.ENERGY]
+			if workplace is not Solarpanel:
+				if workplace.NeedsWorkers():
+					workplace.needworkers_warning.show()
+				else:
+					workplace.needworkers_warning.hide()
 
 func UpdateWorkstations() -> void:
 	var inactiveStations: Array = GetWorkStations().filter(
@@ -216,6 +221,7 @@ func _On_Building_Removed(building: Node2D) -> void:
 	if building == null:
 		print("Error: Trying to remove a null building!")  # Debugging
 		return
+	building.disconnect("building_remove", Callable(self, "_On_Building_Removed"))
 	GlobalSignals.BuildingRemoved.emit(building)
 	await get_tree().create_timer(1).timeout
 	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:

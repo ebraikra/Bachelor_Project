@@ -85,10 +85,11 @@ func _On_Building_Placed(building: Node) -> void:
 	if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD:
 		production_food = building.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 		update_resource_labels(production_food, production_energy)
-	update_resource_labels(production_food, production_energy)
+	else:
+		update_resource_labels(production_food, production_energy)
 
 func _On_Building_Removed(building: Node) -> void:
-	await get_tree().create_timer(0.5).timeout
+	#await get_tree().create_timer(0.5).timeout
 	var production_food = 0
 	var production_energy = 0
 	#if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD:
@@ -97,7 +98,8 @@ func _On_Building_Removed(building: Node) -> void:
 	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:
 		production_energy = -building.data.energyCost
 		update_resource_labels(production_food, production_energy)
-	update_resource_labels(production_food, production_energy)
+	else:
+		update_resource_labels(production_food, production_energy)
 
 func _On_Day_Ended() -> void:
 	await get_tree().create_timer(0.5).timeout
