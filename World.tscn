@@ -1247,7 +1247,7 @@ script = ExtResource("21_0be68")
 unique_name_in_owner = true
 stream = ExtResource("32_37a7a")
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [node name="BackgroundmusicChanged" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

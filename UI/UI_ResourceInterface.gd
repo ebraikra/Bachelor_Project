@@ -36,11 +36,11 @@ func update_resource_labels(production_food, production_energy) -> void:
 		var buff_food = buff_manager.get_buff_value("FOOD") * fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 		food += round(buff_food) + fs.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 	
-	var food_balance = production_food + food - %ColonyService.GetPopulation().size()
+	var food_balance = production_food + food - %ColonyService.GetPopulation().size() - 2 # -2 weil immer 2 Aliens in der nächsten Runde geboren werden
 	if food_balance <= 0:
-		food_indi.text = "[center][p align=center][color=red]" + str(food_balance - 2)
+		food_indi.text = "[center][p align=center][color=red]" + str(food_balance)
 	else:
-		food_indi.text = "[center][p align=center][color=green]+" + str(food_balance - 2)
+		food_indi.text = "[center][p align=center][color=green]+" + str(food_balance)
 	
 	alien_label.text = "%s/%s" % [str(%ColonyService.GetResidentWithJob().size()), str(%ColonyService.GetPopulation().size())]
 	
@@ -82,7 +82,7 @@ func _On_Building_Placed(building: Node) -> void:
 	await get_tree().create_timer(1).timeout
 	var production_food = 0
 	var production_energy = 0
-	if building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD:
+	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.MISC and building.active == true:
 		production_food = building.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 		update_resource_labels(production_food, production_energy)
 	else:
