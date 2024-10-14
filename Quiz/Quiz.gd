@@ -128,7 +128,6 @@ func _on_button_pressed():
 	indexQuestion += 1
 	button.hide()
 	GlobalSignals.EndQuiz.emit()
-	#TODO Buffs hinzufügen
 
 func _on_check_button_pressed():
 	if !answerGiven.is_empty():

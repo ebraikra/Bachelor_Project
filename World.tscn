@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bsi2btyqwer3y"]
+[gd_scene load_steps=46 format=3 uid="uid://bsi2btyqwer3y"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_u2nyf"]
 [ext_resource type="TileSet" uid="uid://dll8h3a6qkx2o" path="res://Assets/tileset.tres" id="2_0q6lx"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://s44g7df2u0b0" path="res://Alien Scientist/hand heben sprechen.png" id="14_j1mxr"]
 [ext_resource type="Texture2D" uid="uid://dq7ivmwrlu05s" path="res://Alien Scientist/hand heben neutral.png" id="15_u2h3d"]
 [ext_resource type="Texture2D" uid="uid://b2gsq81ua5qqv" path="res://Assets/cloud.png" id="16_xufu3"]
+[ext_resource type="Script" path="res://intro.gd" id="17_2d33e"]
 [ext_resource type="Script" path="res://Filter/Cloudparticle.gd" id="17_63vif"]
 [ext_resource type="Texture2D" uid="uid://nv8mrfqqgtt2" path="res://Alien Scientist/traurig.png" id="18_62b5r"]
 [ext_resource type="Texture2D" uid="uid://b5ibhsq5o77n" path="res://Alien Scientist/traurigunterwasser.webp" id="19_hiyi2"]
@@ -863,6 +864,89 @@ animation = &"quiz_friendly"
 layout_mode = 2
 text = "Ok"
 
+[node name="Intro" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_2d33e")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Intro"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -248.0
+offset_right = 224.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Intro/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Intro/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Intro"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Textfield" type="VBoxContainer" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Text" type="Label" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Textfield"]
+layout_mode = 2
+text = "Hallo ich bin Wissenschaftler. Du bist in einer weit entfernten Galaxis das Oberhaupt einer unbekannten Spezies.
+Der Klimawandel bereitet auch hier Probleme. Der Planet wird zunehmend heißer und das Wetter extremer.
+Der Heimatplanet ist vom Klimawandel so gut wie zerstört und wir konnten mit unserer Technologie nichts mehr retten. 
+"
+autowrap_mode = 3
+
+[node name="Control" type="Control" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Control"]
+position = Vector2(213, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"analysis_bad"
+
+[node name="Button" type="Button" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ok"
+
+[node name="SkipButton" type="Button" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Skip"
+
 [node name="Quiz" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
@@ -1256,6 +1340,8 @@ parameters/looping = false
 
 [connection signal="pressed" from="CanvasLayer/Button" to="PlanetManager/PlanetService" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Analysis" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Intro" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/SkipButton" to="CanvasLayer/Intro" method="_on_skip_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Quiz" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/CheckButton" to="CanvasLayer/Quiz" method="_on_check_button_pressed"]
 [connection signal="body_entered" from="Camera2D/Indicator/Area2D" to="Camera2D/Indicator" method="_on_area_2d_body_entered"]
