@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4sal38gvgsl8"]
+[gd_scene load_steps=22 format=3 uid="uid://c4sal38gvgsl8"]
 
 [ext_resource type="Script" path="res://Buildings/Solarpanel.gd" id="1_ecb2m"]
 [ext_resource type="Texture2D" uid="uid://car5fc0p554ed" path="res://Assets/Solarpanel.png" id="2_yvncb"]
 [ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="4_0xnbj"]
+[ext_resource type="Texture2D" uid="uid://fv3a1wjteys1" path="res://Assets/Fire Effect 1/Fire Breath SpriteSheet.png" id="5_e8e3c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
 size = Vector2(16, 16)
@@ -10,6 +11,112 @@ size = Vector2(16, 16)
 [sub_resource type="TileSet" id="TileSet_p1ewo"]
 physics_layer_0/collision_layer = 0
 physics_layer_0/collision_mask = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iff3"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(0, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguue"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(49, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rduxa"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(98, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yufe"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(0, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42m7m"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(49, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdbwn"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(98, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lpdn"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(147, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60v6c"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(0, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyyd"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(49, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss04n"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(98, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rrm"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(147, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwn0l"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(196, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxl5v"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(245, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnkvu"]
+atlas = ExtResource("5_e8e3c")
+region = Rect2(294, 95, 49, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a87av"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iff3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pguue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rduxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yufe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42m7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdbwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lpdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60v6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss04n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwn0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxl5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnkvu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Solarpanel" type="StaticBody2D"]
 collision_layer = 2
@@ -45,6 +152,13 @@ visible = false
 position = Vector2(0, -18)
 scale = Vector2(0.08525, 0.08525)
 texture = ExtResource("4_0xnbj")
+
+[node name="Destroy" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -8)
+scale = Vector2(1.1199, 0.944444)
+sprite_frames = SubResource("SpriteFrames_a87av")
+frame_progress = 0.0355041
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

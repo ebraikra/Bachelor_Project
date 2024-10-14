@@ -14,4 +14,3 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	actor.show()
 	actor.move_and_slide()
 	return RUNNING
-

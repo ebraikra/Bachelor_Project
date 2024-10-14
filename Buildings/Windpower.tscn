@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxjcyygms0ygb"]
+[gd_scene load_steps=29 format=3 uid="uid://bxjcyygms0ygb"]
 
 [ext_resource type="Script" path="res://Buildings/Windpower.gd" id="1_xojmb"]
 [ext_resource type="Texture2D" uid="uid://c27dovnpdhrdj" path="res://Assets/Windkraftwerk/windkraftwerk.png" id="2_cfgk5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://mxg8p3y77t6o" path="res://Assets/Windkraftwerk/rotor3.png" id="5_v84vw"]
 [ext_resource type="Texture2D" uid="uid://3pa5u2h4upe7" path="res://Assets/Windkraftwerk/rotor2.png" id="6_i5mww"]
 [ext_resource type="Texture2D" uid="uid://c1ephy8xm8v1x" path="res://Assets/FarmerWarning.png" id="8_uwp0c"]
+[ext_resource type="Texture2D" uid="uid://fv3a1wjteys1" path="res://Assets/Fire Effect 1/Fire Breath SpriteSheet.png" id="10_eturh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
 size = Vector2(32, 38)
@@ -74,6 +75,112 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iff3"]
+atlas = ExtResource("10_eturh")
+region = Rect2(0, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguue"]
+atlas = ExtResource("10_eturh")
+region = Rect2(49, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rduxa"]
+atlas = ExtResource("10_eturh")
+region = Rect2(98, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yufe"]
+atlas = ExtResource("10_eturh")
+region = Rect2(0, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42m7m"]
+atlas = ExtResource("10_eturh")
+region = Rect2(49, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdbwn"]
+atlas = ExtResource("10_eturh")
+region = Rect2(98, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lpdn"]
+atlas = ExtResource("10_eturh")
+region = Rect2(147, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60v6c"]
+atlas = ExtResource("10_eturh")
+region = Rect2(0, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyyd"]
+atlas = ExtResource("10_eturh")
+region = Rect2(49, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss04n"]
+atlas = ExtResource("10_eturh")
+region = Rect2(98, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rrm"]
+atlas = ExtResource("10_eturh")
+region = Rect2(147, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwn0l"]
+atlas = ExtResource("10_eturh")
+region = Rect2(196, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxl5v"]
+atlas = ExtResource("10_eturh")
+region = Rect2(245, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnkvu"]
+atlas = ExtResource("10_eturh")
+region = Rect2(294, 95, 49, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5y6ir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iff3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pguue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rduxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yufe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42m7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdbwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lpdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60v6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss04n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwn0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxl5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnkvu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Windpower" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -120,6 +227,13 @@ visible = false
 position = Vector2(1, -32)
 scale = Vector2(1.60619, 1.98368)
 texture = ExtResource("8_uwp0c")
+
+[node name="Destroy" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -26)
+scale = Vector2(1.1199, 1.22222)
+sprite_frames = SubResource("SpriteFrames_5y6ir")
+frame_progress = 0.336811
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

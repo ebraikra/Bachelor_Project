@@ -14,6 +14,7 @@ var trees: Dictionary
 var active: bool = false
 @onready var tileMap: TileMap = $Tiles
 @onready var chimney: AnimatedSprite2D = $Chimney
+@onready var destroy: AnimatedSprite2D = $Destroy
 @onready var inactive_warning: Sprite2D = $InActiveWarning
 @onready var needworkers_warning: Sprite2D = $NeedWorkers
 

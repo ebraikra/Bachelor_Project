@@ -229,6 +229,8 @@ func _On_Building_Removed(building: Node2D) -> void:
 		return
 	building.disconnect("building_remove", Callable(self, "_On_Building_Removed"))
 	GlobalSignals.BuildingRemoved.emit(building)
+	building.destroy.show()
+	building.destroy.play("default")
 	await get_tree().create_timer(1).timeout
 	if building.data.buildingCategory != BuildingData.BUILDINGCATEGORY.ENERGY:
 		if building in buildings:
