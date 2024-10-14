@@ -1,12 +1,8 @@
-[gd_resource type="Resource" script_class="WorkplaceData" load_steps=5 format=3 uid="uid://dtersvujlbmbr"]
+[gd_resource type="Resource" script_class="WorkplaceData" load_steps=4 format=3 uid="uid://dtersvujlbmbr"]
 
 [ext_resource type="PackedScene" uid="uid://s53b0c1cc2ns" path="res://Buildings/Coalplant.tscn" id="1_ia6xq"]
 [ext_resource type="Script" path="res://Data/Buildings/WorkplaceData.gd" id="2_sle3x"]
-[ext_resource type="Texture2D" uid="uid://c0prmybt0corq" path="res://Assets/TileSet.png" id="3_cidb0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_soavq"]
-atlas = ExtResource("3_cidb0")
-region = Rect2(112, 464, 16, 16)
+[ext_resource type="Texture2D" uid="uid://gfyon3h2ybgd" path="res://Assets/coalplant32x32.png" id="3_g2bjx"]
 
 [resource]
 resource_name = "Coalplant"
@@ -18,7 +14,7 @@ produces = {
 2: -1
 }
 name = "Kohlekraftwerk"
-texture = SubResource("AtlasTexture_soavq")
+texture = ExtResource("3_g2bjx")
 description = ""
 buildingNode = ExtResource("1_ia6xq")
 buildingCategory = 0
