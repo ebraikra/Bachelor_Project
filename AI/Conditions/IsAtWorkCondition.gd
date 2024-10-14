@@ -17,7 +17,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 				actor.workplace.farmer_2.play("work")
 				actor.workplace.farmer_3.play("work")
 				actor.workplace.farmer_4.play("work")
-		else:
+		elif actor.workplace is Pigfarm:
 			actor.workplace.pig_1.play("awake")
 			actor.workplace.pig_2.play("awake")
 		actor.hide()

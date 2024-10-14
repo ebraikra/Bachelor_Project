@@ -94,7 +94,7 @@ scale = Vector2(1.38984, 1.61446)
 sprite_frames = SubResource("SpriteFrames_pbkjw")
 animation = &"SmokeActive"
 autoplay = "SmokeActive"
-frame_progress = 0.169762
+frame_progress = 0.0920539
 
 [node name="Chimney2" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -103,7 +103,7 @@ scale = Vector2(0.50742, 0.55723)
 sprite_frames = SubResource("SpriteFrames_pbkjw")
 animation = &"SmokeActive"
 autoplay = "SmokeActive"
-frame_progress = 0.881038
+frame_progress = 0.803331
 
 [node name="InActiveWarning" type="Sprite2D" parent="."]
 visible = false

@@ -193,18 +193,24 @@ func UpdateResources() -> void:
 		food += round(buff_food) + workstation.data.produces[BuildingData.BUILDINGCATEGORY.FOOD]
 		wood += round(buff_wood) + workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
 		countWoodProduction += workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]
+		if workstation.data.buildingCategory == BuildingData.BUILDINGCATEGORY.WOOD:
+			for i in workstation.data.produces[BuildingData.BUILDINGCATEGORY.WOOD]:
+				if tile_map:
+					tile_map.delete_trees_on_produced_wood()
 		co2 += workstation.data.co2
 	var treeCounter: int = 0
-	if tile_map:
-		tile_map.delete_trees_on_produced_wood(countWoodProduction, treeCounter)
-	else:
-		print("TileMap reference is null, cannot call the function.")
+	
+	#if tile_map:
+		#tile_map.delete_trees_on_produced_wood(countWoodProduction, treeCounter)
+	#else:
+		#print("TileMap reference is null, cannot call the function.")
 	#Eventuelle Codeleiche?-------------------------
 	#activeFoodStations = activeWorkstations.filter(func(ws: Workstation) -> bool:
 		#return ws.data.buildingCategory == BuildingData.BUILDINGCATEGORY.FOOD and ws.IsActive())	
 	
 	#Anzahl der Bäume verringert den aktuellen CO2 Wert, 1 Baum = -1 CO2 
 	co2 -= %WorldMap.GetAllTrees().size()
+	print(tile_map.GetAllTrees().size())
 	#Ruft den Smogfilter auf und gibt über den aktuellen Stand des CO2-Werts bescheid
 	%Smog.update_co2(co2)
 	#Startet den Analysebericht, wenn es mindestens eine Analyse gibt
