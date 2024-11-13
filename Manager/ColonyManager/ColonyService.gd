@@ -77,7 +77,7 @@ func _On_DayEnded() -> void:
 	days += 1
 	print("Runde: ", days)
 	# Ab 5 tagen = Frage aufploppen
-	if days % 5 == 0: # Change to 5 days
+	if days % 5 == 0:
 		if quiz.indexQuestion < quiz.questionsList.size(): 
 			GlobalSignals.StartQuiz.emit()
 			print("QUIZ GO")
@@ -211,12 +211,19 @@ func UpdateResources() -> void:
 	#Anzahl der Bäume verringert den aktuellen CO2 Wert, 1 Baum = -1 CO2 
 	co2 -= %WorldMap.GetAllTrees().size()
 	print(tile_map.GetAllTrees().size())
+	#Buff für CO2
+	var buff_co2 = buff_manager.get_buff_value("CO2")
+	if buff_co2 > 0:
+		co2 += buff_co2
+	elif buff_co2 < 0:
+		co2 += co2 * buff_co2
+		
+	if co2 <= 0: co2 = 0
 	#Ruft den Smogfilter auf und gibt über den aktuellen Stand des CO2-Werts bescheid
 	%Smog.update_co2(co2)
 	#Startet den Analysebericht, wenn es mindestens eine Analyse gibt
 	if %Analysis.getAnalysisCount() > 0:
 		%Analysis.StartNewAnalysis()
-	if co2 <= 0: co2 = 0
 	#Ein NPC benötigt pro Tag eine Einheit Essen, diese wird hier abgezogen
 	#print("Population size before food deduction: ", GetPopulation().size())
 	food -= GetPopulation().size()

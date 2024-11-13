@@ -22,10 +22,12 @@ func _On_Day_Ended() -> void:
 #Zeigt die Verloren-Übersicht an
 func _On_RoundLost() -> void:
 	$CanvasLayer/LosePanel.show()
+	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
 	$CanvasLayer/Button.disabled = true
 	
 func _On_RoundLostTree() -> void:
 	$CanvasLayer/LosePanel2.show()
+	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
 	$CanvasLayer/Button.disabled = true
 
 func _On_RoundWon() -> void:

@@ -84,9 +84,13 @@ func check_answer():
 		var random_float = randf()
 		if random_float < 0.01:
 			# 1% chance auf besondere Belohnung
-			applied_buff = buff_manager.apply_buff(buff_type, 3)
-			alienScientist.play("quiz_speak")
-			questionLabel.text = "Unglaublich! Die Bevölkerung sieht es genauso und ist sich einig. Die Produktion wird sehr stark ansteigen"
+			if buff_type == "CO2":
+				applied_buff = buff_manager.apply_buff(buff_type, -1)
+				questionLabel.text = "Woa! Das scheint sehr gut zu funktionieren. Scheint so als wäre kaum noch CO2 mehr in der Atmosphäre"
+			else:
+				applied_buff = buff_manager.apply_buff(buff_type, 3)
+				alienScientist.play("quiz_speak")
+				questionLabel.text = "Unglaublich! Manchmal braucht man nur ein bisschen Glück und dann läuft alles von alleine"
 		elif random_float < 0.71:
 			# 70% chance ist Niete
 			alienScientist.play("quiz_neutral")
