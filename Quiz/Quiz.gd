@@ -19,11 +19,17 @@ var question: Dictionary
 var indexQuestion: int = 0
 var answerGiven: String
 var active_buffs = {}
+var infoAboutBuffsGiven = false
+
+var solarpanel_data = preload("res://Data/Buildings/Buildings/Solarpanel.tres")
+var windpower_data = preload("res://Data/Buildings/Buildings/Windpower.tres")
+var plantfarm_data = preload("res://Data/Buildings/Buildings/Plantfarm.tres")
 
 func _ready():
 	hide()
 	questionsList.shuffle() # würfelt die Fragen nach dem Neustart des Spiels
 	GlobalSignals.StartQuiz.connect(_start_quiz)
+	reset_to_original_value()
 
 func _start_quiz():
 	if indexQuestion < questionsList.size(): # zeigt keine Fragen mehr, wenn alle Fragen beantwortet worden sind
@@ -91,7 +97,7 @@ func check_answer():
 				applied_buff = buff_manager.apply_buff(buff_type, 3)
 				alienScientist.play("quiz_speak")
 				questionLabel.text = "Unglaublich! Manchmal braucht man nur ein bisschen Glück und dann läuft alles von alleine"
-		elif random_float < 0.71:
+		elif random_float < 0.61:
 			# 70% chance ist Niete
 			alienScientist.play("quiz_neutral")
 			questionLabel.text = question.CORRECTRIVET
@@ -111,7 +117,16 @@ func check_answer():
 			changeEnergy += changeEnergy * buff_manager.get_buff_value("ENERGY")
 			print("changeEnergy:", changeEnergy)
 			colony_service.setEnergy(changeEnergy)
-			
+	#Nur Upgrades
+	if buff_type == "UPGRADEENERGY":
+		if applied_buff:
+			var upgrade_renewable_energy = buff_manager.get_buff_value("UPGRADEENERGY")
+			windpower_data.produces[0] += windpower_data.produces[0] * upgrade_renewable_energy
+			solarpanel_data.produces[0] += solarpanel_data.produces[0] * upgrade_renewable_energy
+	if buff_type == "UPGRADEFOOD":
+		if applied_buff:
+			var upgrade_plant_farm = buff_manager.get_buff_value("UPGRADEFOOD")
+			plantfarm_data.produces[1] += plantfarm_data.produces[1] * upgrade_plant_farm
 		
 func show_result():
 	answerList.hide()
@@ -131,6 +146,12 @@ func _on_button_pressed():
 	hintText.hide()
 	indexQuestion += 1
 	button.hide()
+	if infoAboutBuffsGiven == false:
+		%Intro.show()
+		%Text.text = "Es wurde ein Buff hinzugefügt. Für jede richtig beantwortete Frage gibt es passende Verbesserungen. Die erscheinen jeweils unter den Ressourcen. Falsch beantwortete Fragen verschlechtern die Werte. Hinweis: Treibhausgase, sind nicht direkt erkenntlich. Übrigends gibt es in seltenen Fällen eine besondere Belohnung. Vielleicht hast du Glück und erhälst einen Bonus!"
+		$"../Intro/Panel/MarginContainer/VBoxContainer/Button".hide()
+		$"../Intro/Panel/MarginContainer/VBoxContainer/Control/AlienScientist".play("quiz_friendly")
+		infoAboutBuffsGiven = true
 	GlobalSignals.EndQuiz.emit()
 
 func _on_check_button_pressed():
@@ -138,3 +159,9 @@ func _on_check_button_pressed():
 		alienScientist.stop()
 		check_answer()
 		show_result()
+		
+# Setzt den Produktionswert auf den Originalwert zurück
+func reset_to_original_value():
+	windpower_data.produces[0] = 5
+	solarpanel_data.produces[0] = 3
+	plantfarm_data.produces[1] = 15

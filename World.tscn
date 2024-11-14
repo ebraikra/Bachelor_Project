@@ -922,6 +922,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Text" type="Label" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Textfield"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Hallo ich bin Wissenschaftler. Du bist in einer weit entfernten Galaxis das Oberhaupt einer unbekannten Spezies.
 Der Klimawandel bereitet auch hier Probleme. Der Planet wird zunehmend heißer und das Wetter extremer.
@@ -937,7 +938,7 @@ layout_mode = 2
 position = Vector2(213, 68)
 scale = Vector2(0.179598, 0.151639)
 sprite_frames = SubResource("SpriteFrames_ddp5r")
-animation = &"analysis_bad"
+animation = &"quiz_friendly"
 
 [node name="Button" type="Button" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
