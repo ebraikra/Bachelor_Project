@@ -87,25 +87,25 @@ func check_answer():
 	var debuff_value = question.DEBUFFVALUE
 	var applied_buff = false
 	if answerGiven == question.CORRECTANSWER:
-		var random_float = randf()
-		if random_float < 0.01:
+		#var random_float = randf()
+		#if random_float < 0.01:
 			# 1% chance auf besondere Belohnung
-			if buff_type == "CO2":
-				applied_buff = buff_manager.apply_buff(buff_type, -1)
-				questionLabel.text = "Woa! Das scheint sehr gut zu funktionieren. Scheint so als wäre kaum noch CO2 mehr in der Atmosphäre"
-			else:
-				applied_buff = buff_manager.apply_buff(buff_type, 3)
-				alienScientist.play("quiz_speak")
-				questionLabel.text = "Unglaublich! Manchmal braucht man nur ein bisschen Glück und dann läuft alles von alleine"
-		elif random_float < 0.61:
-			# 70% chance ist Niete
-			alienScientist.play("quiz_neutral")
-			questionLabel.text = question.CORRECTRIVET
-		else:
-			# 30% chance auf Buff
-			applied_buff = buff_manager.apply_buff(buff_type, buff_value)
-			alienScientist.play("quiz_friendly")
-			questionLabel.text = question.CORRECTANSWERTEXT
+		#	if buff_type == "CO2":
+		#		applied_buff = buff_manager.apply_buff(buff_type, -1)
+		#		questionLabel.text = "Woa! Das scheint sehr gut zu funktionieren. Scheint so als wäre kaum noch CO2 mehr in der Atmosphäre"
+		#	else:
+		#		applied_buff = buff_manager.apply_buff(buff_type, 3)
+		#		alienScientist.play("quiz_speak")
+		#		questionLabel.text = "Unglaublich! Manchmal braucht man nur ein bisschen Glück und dann läuft alles von alleine"
+		#elif random_float < 0.61:
+		#	# 70% chance ist Niete
+		#	alienScientist.play("quiz_neutral")
+		#	questionLabel.text = question.CORRECTRIVET
+		#else:
+		#	# 30% chance auf Buff
+		applied_buff = buff_manager.apply_buff(buff_type, buff_value)
+		alienScientist.play("quiz_friendly")
+		questionLabel.text = question.CORRECTANSWERTEXT
 	else:
 			applied_buff = buff_manager.apply_buff(buff_type, debuff_value)
 			alienScientist.play("quiz_neutral")
@@ -148,7 +148,7 @@ func _on_button_pressed():
 	button.hide()
 	if infoAboutBuffsGiven == false:
 		%Intro.show()
-		%Text.text = "Es wurde ein Buff hinzugefügt. Für jede richtig beantwortete Frage gibt es passende Verbesserungen. Die erscheinen jeweils unter den Ressourcen. Falsch beantwortete Fragen verschlechtern die Werte. Hinweis: Treibhausgase, sind nicht direkt erkenntlich. Übrigends gibt es in seltenen Fällen eine besondere Belohnung. Vielleicht hast du Glück und erhälst einen Bonus!"
+		%Text.text = "Es wurde ein Buff hinzugefügt. Für jede richtig beantwortete Frage gibt es passende Verbesserungen. Die erscheinen jeweils unter den Ressourcen. Falsch beantwortete Fragen verschlechtern die Werte. Hinweis: Treibhausgase, sind nicht direkt erkenntlich."
 		$"../Intro/Panel/MarginContainer/VBoxContainer/Button".hide()
 		$"../Intro/Panel/MarginContainer/VBoxContainer/Control/AlienScientist".play("quiz_friendly")
 		infoAboutBuffsGiven = true
