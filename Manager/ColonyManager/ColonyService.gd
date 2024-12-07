@@ -250,6 +250,7 @@ func _On_Building_Removed(building: Node2D) -> void:
 			building = null
 			AssignWorkersToWorkstations()
 			UpdateWorkstations()
+			activeWorkstations = get_active_stations()
 			update_activeFoodStations(activeWorkstations)
 			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
 	elif building.data.buildingCategory == BuildingData.BUILDINGCATEGORY.ENERGY:
@@ -264,6 +265,7 @@ func _On_Building_Removed(building: Node2D) -> void:
 			building = null
 			AssignWorkersToWorkstations()
 			UpdateWorkstations()
+			activeWorkstations = get_active_stations()
 			update_activeFoodStations(activeWorkstations)
 			print("Building removed from buildings list. Remaining buildings: ", buildings.size())
 	print("Wood", wood)
