@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="WorkplaceData" load_steps=4 format=3 uid="uid://bi8ev2fg1kc7g"]
+
+[ext_resource type="PackedScene" uid="uid://c4sal38gvgsl8" path="res://Buildings/Solarpanel.tscn" id="1_pi6b4"]
+[ext_resource type="Script" path="res://Data/Buildings/WorkplaceData.gd" id="2_cn2ut"]
+[ext_resource type="Texture2D" uid="uid://car5fc0p554ed" path="res://Assets/Solarpanel.png" id="3_ghsj4"]
+
+[resource]
+resource_name = "Solarpanel"
+script = ExtResource("2_cn2ut")
+neededWorkers = 0
+produces = {
+0: 3,
+1: 0,
+2: 0
+}
+name = "Solarpanel"
+texture = ExtResource("3_ghsj4")
+description = ""
+buildingNode = ExtResource("1_pi6b4")
+buildingCategory = 0
+buildingCost = 10
+energyCost = 0
+co2 = 0

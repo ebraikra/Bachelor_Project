@@ -5,6 +5,7 @@ extends Node
 
 signal RoundLost
 signal RoundLostTree
+signal RoundWon
 
 enum PHASES {
 	INTRO,
@@ -12,6 +13,7 @@ enum PHASES {
 	EVENT,
 	LOSEROUND,
 	LOSEROUNDTREE,
+	ROUNDWON,
 	OUTRO
 }
 
@@ -25,6 +27,8 @@ func StartPhase(phase: PHASES) -> void:
 			RoundLost.emit()
 		PHASES.LOSEROUNDTREE:
 			RoundLostTree.emit()
+		PHASES.ROUNDWON:
+			RoundWon.emit()
 
 #Codeleiche
 func _PhaseBuild() -> void:

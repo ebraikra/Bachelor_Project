@@ -5,8 +5,11 @@ extends Node2D
 func _ready() -> void:
 	GlobalSignals.NewDayStarted.connect(_On_NewDay_Started)
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
+	GlobalSignals.StartQuiz.connect(_On_Start_Quiz)
+	GlobalSignals.EndQuiz.connect(_On_End_Quiz)
 	RoundManager.RoundLost.connect(_On_RoundLost)
 	RoundManager.RoundLostTree.connect(_On_RoundLostTree)
+	RoundManager.RoundWon.connect(_On_RoundWon)
 
 #Deaktiviert den "Neuer Tag" Button, um potentiellen Fehlern entgegen zu wirken
 func _On_NewDay_Started() -> void:
@@ -19,10 +22,26 @@ func _On_Day_Ended() -> void:
 #Zeigt die Verloren-Übersicht an
 func _On_RoundLost() -> void:
 	$CanvasLayer/LosePanel.show()
+	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
+	$CanvasLayer/Button.disabled = true
 	
 func _On_RoundLostTree() -> void:
 	$CanvasLayer/LosePanel2.show()
+	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
+	$CanvasLayer/Button.disabled = true
 
+func _On_RoundWon() -> void:
+	$CanvasLayer/WinPanel.show()
+	$CanvasLayer/Button.disabled = true
+
+func _On_Start_Quiz() -> void:
+	await get_tree().create_timer(0.5).timeout # Benötigt damit das vorherige Signal den Button nicht direkt wieder überschreibt.
+	$CanvasLayer/Button.disabled = true
+	
+func _On_End_Quiz() -> void:
+	await get_tree().create_timer(0.5).timeout
+	$CanvasLayer/Button.disabled = false
+	
 #Sorgt dafür, das Gebäude an das Spielgitter "gesnapped" werden
 func _unhandled_input(event: InputEvent) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()

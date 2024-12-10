@@ -37,7 +37,7 @@ func _Update() -> void:
 		uiBI = UI_BuildingItem.instantiate()
 		uiBI.BuildingSelected.connect(_On_BuildingSelected)
 		get_node("TabContainer/" + building.BUILDINGCATEGORY.keys()[building.buildingCategory].to_lower().capitalize() + "/MarginContainer/ScrollContainer/HBoxContainer").add_child(uiBI)
-		if colonyService.wood - building.buildingCost <= 0:
+		if colonyService.wood - building.buildingCost < 0:
 			canBuild = false
 		else:
 			canBuild = true

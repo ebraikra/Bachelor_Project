@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bsi2btyqwer3y"]
+[gd_scene load_steps=46 format=3 uid="uid://bsi2btyqwer3y"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_u2nyf"]
 [ext_resource type="TileSet" uid="uid://dll8h3a6qkx2o" path="res://Assets/tileset.tres" id="2_0q6lx"]
@@ -15,14 +15,614 @@
 [ext_resource type="Script" path="res://Indicator.gd" id="7_6biyw"]
 [ext_resource type="Texture2D" uid="uid://bmicuuj4diqj4" path="res://Assets/FarmerRed.png" id="7_pbgl5"]
 [ext_resource type="Script" path="res://Manager/PlanetManager/PlanetService.gd" id="8_iwj4d"]
+[ext_resource type="Script" path="res://Quiz/Quiz.gd" id="9_lem08"]
 [ext_resource type="Script" path="res://Manager/ColonyManager/ColonyService.gd" id="9_ql7fa"]
+[ext_resource type="Texture2D" uid="uid://bma4br3lt31sc" path="res://Alien Scientist/hand heben.png" id="10_icknf"]
 [ext_resource type="Script" path="res://Manager/ColonyManager/ColonyData.gd" id="10_rbojh"]
+[ext_resource type="Texture2D" uid="uid://fo1cnrixfkju" path="res://Alien Scientist/neutral.png" id="12_4dtfg"]
+[ext_resource type="Texture2D" uid="uid://bpih88gd4f0r1" path="res://Alien Scientist/nicht gut.png" id="12_5uk5o"]
+[ext_resource type="Texture2D" uid="uid://52vokl37syel" path="res://Alien Scientist/hand heben traurig.png" id="13_u2xq8"]
+[ext_resource type="Texture2D" uid="uid://s44g7df2u0b0" path="res://Alien Scientist/hand heben sprechen.png" id="14_j1mxr"]
+[ext_resource type="Texture2D" uid="uid://dq7ivmwrlu05s" path="res://Alien Scientist/hand heben neutral.png" id="15_u2h3d"]
 [ext_resource type="Texture2D" uid="uid://b2gsq81ua5qqv" path="res://Assets/cloud.png" id="16_xufu3"]
+[ext_resource type="Script" path="res://intro.gd" id="17_2d33e"]
 [ext_resource type="Script" path="res://Filter/Cloudparticle.gd" id="17_63vif"]
+[ext_resource type="Texture2D" uid="uid://nv8mrfqqgtt2" path="res://Alien Scientist/traurig.png" id="18_62b5r"]
+[ext_resource type="Texture2D" uid="uid://b5ibhsq5o77n" path="res://Alien Scientist/traurigunterwasser.webp" id="19_hiyi2"]
+[ext_resource type="Script" path="res://Buffs/Buffmanager.gd" id="21_0be68"]
+[ext_resource type="Texture2D" uid="uid://7oxa07ugd4fq" path="res://Alien Scientist/freundlich.png" id="22_sj1ex"]
+[ext_resource type="Texture2D" uid="uid://c038l2st6yhq6" path="res://Alien Scientist/sprechen.png" id="23_nc2ju"]
+[ext_resource type="AudioStream" uid="uid://bbv50b56vyb55" path="res://Music/Equatorial Complex(bearbeitet).mp3" id="32_37a7a"]
+[ext_resource type="AudioStream" uid="uid://b54lcss8cmcll" path="res://Music/Morgana Rides.mp3" id="33_pkygw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjgln"]
 atlas = ExtResource("7_pbgl5")
 region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ddp5r"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 4.0,
+"texture": ExtResource("12_5uk5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5uk5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_u2xq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 4.0,
+"texture": ExtResource("13_u2xq8")
+}, {
+"duration": 6.0,
+"texture": ExtResource("12_5uk5o")
+}],
+"loop": false,
+"name": &"analysis_bad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}],
+"loop": false,
+"name": &"analysis_neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j1mxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_u2h3d")
+}, {
+"duration": 8.0,
+"texture": ExtResource("10_icknf")
+}, {
+"duration": 6.0,
+"texture": ExtResource("22_sj1ex")
+}],
+"loop": false,
+"name": &"quiz_friendly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 10.0,
+"texture": ExtResource("12_4dtfg")
+}],
+"loop": false,
+"name": &"quiz_neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sj1ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_nc2ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4dtfg")
+}, {
+"duration": 10.0,
+"texture": ExtResource("22_sj1ex")
+}],
+"loop": false,
+"name": &"quiz_speak",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhhbe"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1me3k"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2axn"]
 size = Vector2(10, 10)
@@ -98,30 +698,33 @@ anchor_right = 0.5
 grow_horizontal = 2
 script = ExtResource("3_y8p6m")
 
-[node name="ResourcesContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ResourceInterface"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -52.0
-offset_right = 52.0
-offset_bottom = 40.0
+offset_left = -132.0
+offset_right = 132.0
+offset_bottom = 50.0
 grow_horizontal = 2
 
-[node name="FoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="ResourcesContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer"]
 layout_mode = 2
 
-[node name="FoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/FoodContainer"]
+[node name="FoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
+layout_mode = 2
+
+[node name="FoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/FoodContainer"]
 layout_mode = 2
 texture = ExtResource("4_dumw7")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="FoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/FoodContainer"]
+[node name="FoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/FoodContainer"]
 layout_mode = 2
 text = "100"
 
-[node name="FoodIndi" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/ResourcesContainer/FoodContainer"]
+[node name="FoodIndi" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/FoodContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -129,43 +732,66 @@ theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 fit_content = true
 
-[node name="EnergyContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="EnergyContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
 layout_mode = 2
 
-[node name="EnergyIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/EnergyContainer"]
+[node name="EnergyIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/EnergyContainer"]
 layout_mode = 2
 texture = ExtResource("5_84bw3")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="EnergyLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/EnergyContainer"]
+[node name="EnergyLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/EnergyContainer"]
 layout_mode = 2
 text = "10/10"
 
-[node name="WoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="WoodContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
 layout_mode = 2
 
-[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/WoodContainer"]
+[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/WoodContainer"]
 layout_mode = 2
 texture = ExtResource("6_vnvit")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="WoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/WoodContainer"]
+[node name="WoodLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/WoodContainer"]
 layout_mode = 2
 text = "100"
 
-[node name="AliensContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/ResourcesContainer"]
+[node name="AliensContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer"]
 layout_mode = 2
 
-[node name="AlienIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/ResourcesContainer/AliensContainer"]
+[node name="AlienIcon" type="TextureRect" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/AliensContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_xjgln")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="AlienLabel" type="Label" parent="CanvasLayer/ResourceInterface/ResourcesContainer/AliensContainer"]
+[node name="AlienLabel" type="Label" parent="CanvasLayer/ResourceInterface/VBoxContainer/ResourcesContainer/AliensContainer"]
 layout_mode = 2
+
+[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/ResourceInterface/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="FoodBuffLabel" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/BuffContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "100"
+
+[node name="EnergyBuffLabel" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/BuffContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "10"
+
+[node name="WoodBuffLabel" type="RichTextLabel" parent="CanvasLayer/ResourceInterface/VBoxContainer/BuffContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "100"
 
 [node name="Analysis" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -215,6 +841,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Analyse"
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -223,7 +850,190 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Control" type="Control" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Control"]
+position = Vector2(213, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"quiz_friendly"
+
 [node name="Button" type="Button" parent="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ok"
+
+[node name="Intro" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_2d33e")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Intro"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -248.0
+offset_right = 224.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Intro/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Intro/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Intro"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Textfield" type="VBoxContainer" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Text" type="Label" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Textfield"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hallo ich bin Wissenschaftler. Du bist in einer weit entfernten Galaxis das Oberhaupt einer unbekannten Spezies.
+Der Klimawandel bereitet auch hier Probleme. Der Planet wird zunehmend heißer und das Wetter extremer.
+Der Heimatplanet ist vom Klimawandel so gut wie zerstört und wir konnten mit unserer Technologie nichts mehr retten. 
+"
+autowrap_mode = 3
+
+[node name="Control" type="Control" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Control"]
+position = Vector2(213, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"quiz_friendly"
+
+[node name="Button" type="Button" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ok"
+
+[node name="SkipButton" type="Button" parent="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Skip"
+
+[node name="Quiz" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_lem08")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Quiz"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = -331.0
+offset_right = 511.0
+offset_bottom = 472.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Quiz/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Quiz/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/HBoxContainer/Control"]
+position = Vector2(55, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"analysis_bad"
+
+[node name="Questions" type="Label" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(900, 140)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yhhbe")
+text = "Question"
+label_settings = SubResource("LabelSettings_1me3k")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnswerList" type="VBoxContainer" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Hinttext" type="RichTextLabel" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Ok"
+
+[node name="CheckButton" type="Button" parent="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Ok"
 
@@ -270,9 +1080,22 @@ layout_mode = 2
 [node name="LoseText" type="RichTextLabel" parent="CanvasLayer/LosePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
-text = "Unsere Spezies ist verhungert. "
+text = "Unsere Essensvorräte sind aufgebraucht. Jetzt werden auch die letzten Überlebenden dem Hunger zum Opfer fallen!"
 fit_content = true
 scroll_active = false
+
+[node name="Control" type="Control" parent="CanvasLayer/LosePanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LosePanel/MarginContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 73.0
+offset_right = 384.0
+offset_bottom = 363.0
+texture = ExtResource("18_62b5r")
+expand_mode = 1
 
 [node name="LosePanel2" type="Panel" parent="CanvasLayer"]
 visible = false
@@ -281,10 +1104,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -254.0
+offset_left = -397.0
 offset_top = -254.0
-offset_right = 254.0
-offset_bottom = 254.0
+offset_right = 385.0
+offset_bottom = 455.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -317,9 +1140,24 @@ layout_mode = 2
 [node name="LoseText" type="RichTextLabel" parent="CanvasLayer/LosePanel2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
-text = "Der Planet wurde zerstört. Es gibt kein zurück mehr. Wir haben versagt."
+text = "Der Planet wurde zerstört. Es gibt kein zurück mehr. Wir haben versagt.
+Dadurch, dass es keine Bäume mehr gibt, die das CO2 aufnehmen können, wird sich der Planet weiter aufheizen und unbewohnbar sein. 
+Versuche beim nächsten Mal nicht zu viel aufeinmal zu produzieren. Baue nur das was nötig ist, damit der nächste Planet sich schneller erholen kann."
 fit_content = true
 scroll_active = false
+
+[node name="Control" type="Control" parent="CanvasLayer/LosePanel2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LosePanel2/MarginContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 90.0
+offset_right = 518.0
+offset_bottom = 380.0
+texture = ExtResource("19_hiyi2")
+expand_mode = 1
 
 [node name="GreyFilter" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -335,6 +1173,64 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.117647, 0.117647, 0.117647, 0)
+
+[node name="WinPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = -254.0
+offset_right = 254.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/WinPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "GESCHAFFT!"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WinText" type="RichTextLabel" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Du hast es geschafft. Jetzt gibt es ein Gleichgewicht und das Klima auf dem Planeten ist gerettet. Schaffst du es auch auf deinem eigenen Planeten?"
+fit_content = true
+scroll_active = false
+
+[node name="Control" type="Control" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(116, 150)
+layout_mode = 2
+
+[node name="AlienScientist" type="AnimatedSprite2D" parent="CanvasLayer/WinPanel/MarginContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
+position = Vector2(240, 68)
+scale = Vector2(0.179598, 0.151639)
+sprite_frames = SubResource("SpriteFrames_ddp5r")
+animation = &"quiz_friendly"
 
 [node name="WorldMap" type="TileMap" parent="."]
 unique_name_in_owner = true
@@ -428,8 +1324,28 @@ speed_scale = 2.23
 fixed_fps = 165
 script = ExtResource("17_63vif")
 
+[node name="Buffmanager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("21_0be68")
+
+[node name="Backgroundmusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("32_37a7a")
+volume_db = -13.482
+autoplay = true
+parameters/looping = true
+
+[node name="BackgroundmusicChanged" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("33_pkygw")
+parameters/looping = true
+
 [connection signal="pressed" from="CanvasLayer/Button" to="PlanetManager/PlanetService" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Analysis/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Analysis" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Intro" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Intro/Panel/MarginContainer/VBoxContainer/SkipButton" to="CanvasLayer/Intro" method="_on_skip_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/Button" to="CanvasLayer/Quiz" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Quiz/Panel/MarginContainer/VBoxContainer/CheckButton" to="CanvasLayer/Quiz" method="_on_check_button_pressed"]
 [connection signal="body_entered" from="Camera2D/Indicator/Area2D" to="Camera2D/Indicator" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Camera2D/Indicator/Area2D" to="Camera2D/Indicator" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Timer" to="WorldMap" method="_on_timer_timeout"]

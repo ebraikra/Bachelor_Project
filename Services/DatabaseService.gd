@@ -18,4 +18,3 @@ func LoadBuildings(directory: String) -> void:
 
 func GetBuildings() -> Array[BuildingData]:
 	return buildings
-

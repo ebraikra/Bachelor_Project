@@ -37,6 +37,7 @@ clip_tabs = false
 [node name="Wood" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Wood"]
 layout_mode = 1
@@ -64,6 +65,7 @@ theme_override_constants/separation = 15
 [node name="Energy" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Energy"]
 layout_mode = 1
@@ -91,6 +93,7 @@ theme_override_constants/separation = 15
 [node name="Food" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Food"]
 layout_mode = 1
@@ -117,6 +120,7 @@ theme_override_constants/separation = 15
 
 [node name="Misc" type="Control" parent="TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Misc"]
 layout_mode = 1

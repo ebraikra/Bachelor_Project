@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb5u0c8dvehs"]
+[gd_scene load_steps=32 format=3 uid="uid://bb5u0c8dvehs"]
 
 [ext_resource type="Script" path="res://Buildings/Pigfarm.gd" id="1_rpmvf"]
 [ext_resource type="Texture2D" uid="uid://beca4mn8toqu6" path="res://Assets/Barracks.png" id="2_a8m1f"]
 [ext_resource type="Texture2D" uid="uid://cjeihcixoxxwx" path="res://Assets/Highlighted-Boxes.png" id="2_k8i1t"]
 [ext_resource type="Texture2D" uid="uid://r6ibepi47nxd" path="res://Assets/Pig.png" id="5_pn168"]
 [ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="5_wx0vr"]
+[ext_resource type="Texture2D" uid="uid://c1ephy8xm8v1x" path="res://Assets/FarmerWarning.png" id="6_klcsi"]
+[ext_resource type="Texture2D" uid="uid://fv3a1wjteys1" path="res://Assets/Fire Effect 1/Fire Breath SpriteSheet.png" id="8_a3lvd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
 size = Vector2(32, 16)
@@ -17,26 +19,14 @@ region = Rect2(0, 48, 32, 17)
 texture = ExtResource("2_k8i1t")
 0:0/next_alternative_id = 6
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:0/4 = 4
 0:0/4/modulate = Color(0, 0, 0, 1)
-0:0/4/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/4/physics_layer_0/angular_velocity = 0.0
 1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
 3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
 4:0/0 = 0
-4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_wxi6i"]
 physics_layer_0/collision_layer = 0
@@ -82,6 +72,112 @@ animations = [{
 "loop": true,
 "name": &"sleep",
 "speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iff3"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(0, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguue"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(49, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rduxa"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(98, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yufe"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(0, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42m7m"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(49, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdbwn"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(98, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lpdn"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(147, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60v6c"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(0, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyyd"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(49, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss04n"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(98, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rrm"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(147, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwn0l"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(196, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxl5v"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(245, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnkvu"]
+atlas = ExtResource("8_a3lvd")
+region = Rect2(294, 95, 49, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dq3mx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iff3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pguue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rduxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yufe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42m7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdbwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lpdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60v6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss04n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwn0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxl5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnkvu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
 }]
 
 [node name="Pigfarm" type="StaticBody2D"]
@@ -134,6 +230,19 @@ visible = false
 position = Vector2(0, -18)
 scale = Vector2(0.08525, 0.08525)
 texture = ExtResource("5_wx0vr")
+
+[node name="NeedWorkers" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(6, -25)
+scale = Vector2(1, 1.2)
+texture = ExtResource("6_klcsi")
+
+[node name="Destroy" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(11, -12)
+scale = Vector2(1.1199, 1.22222)
+sprite_frames = SubResource("SpriteFrames_dq3mx")
+frame_progress = 0.906578
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

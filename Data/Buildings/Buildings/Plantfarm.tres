@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WorkplaceData" load_steps=4 format=3 uid="uid://boxbcgrb3uejq"]
+
+[ext_resource type="PackedScene" uid="uid://dur6bp83bo0vd" path="res://Buildings/Plantfarm.tscn" id="1_jk5ps"]
+[ext_resource type="Script" path="res://Data/Buildings/WorkplaceData.gd" id="2_xr5gd"]
+[ext_resource type="Texture2D" uid="uid://b8mqh78hlcxt7" path="res://Assets/Plantfarm(small).webp" id="3_cavfi"]
+
+[resource]
+script = ExtResource("2_xr5gd")
+neededWorkers = 4
+produces = {
+0: 0,
+1: 15,
+2: 0
+}
+name = "Plantfarm"
+texture = ExtResource("3_cavfi")
+description = ""
+buildingNode = ExtResource("1_jk5ps")
+buildingCategory = 1
+buildingCost = 25
+energyCost = 25
+co2 = 10

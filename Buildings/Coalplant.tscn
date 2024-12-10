@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://s53b0c1cc2ns"]
+[gd_scene load_steps=30 format=3 uid="uid://s53b0c1cc2ns"]
 
-[ext_resource type="Script" path="res://Buildings/Lumberjack.gd" id="1_t6ehe"]
-[ext_resource type="Texture2D" uid="uid://c0prmybt0corq" path="res://Assets/TileSet.png" id="2_s1bpf"]
+[ext_resource type="Script" path="res://Buildings/Coalplant.gd" id="1_lft71"]
+[ext_resource type="Texture2D" uid="uid://gfyon3h2ybgd" path="res://Assets/coalplant32x32.png" id="2_adht1"]
 [ext_resource type="Texture2D" uid="uid://cjp4gslmona38" path="res://Assets/SmokeAndFire.png" id="4_bc4bn"]
 [ext_resource type="Texture2D" uid="uid://c1lat4d6vqsyq" path="res://Assets/high-volt-triangle-mark-in-pixel-art-style-vector-removebg-preview.png" id="4_sjx87"]
+[ext_resource type="Texture2D" uid="uid://c1ephy8xm8v1x" path="res://Assets/FarmerWarning.png" id="5_rnk8n"]
+[ext_resource type="Texture2D" uid="uid://fv3a1wjteys1" path="res://Assets/Fire Effect 1/Fire Breath SpriteSheet.png" id="6_wu3v7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhlbd"]
-size = Vector2(16, 16)
+size = Vector2(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_p1ewo"]
 physics_layer_0/collision_layer = 0
@@ -55,19 +57,126 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iff3"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(0, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguue"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(49, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rduxa"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(98, 5, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yufe"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(0, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42m7m"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(49, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdbwn"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(98, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lpdn"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(147, 50, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60v6c"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(0, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyyd"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(49, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss04n"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(98, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rrm"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(147, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwn0l"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(196, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxl5v"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(245, 95, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnkvu"]
+atlas = ExtResource("6_wu3v7")
+region = Rect2(294, 95, 49, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ql7l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iff3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pguue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rduxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yufe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42m7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdbwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lpdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60v6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss04n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwn0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxl5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnkvu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Coalplant" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 2
 input_pickable = true
-script = ExtResource("1_t6ehe")
+script = ExtResource("1_lft71")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -4)
 shape = SubResource("RectangleShape2D_jhlbd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_s1bpf")
-region_enabled = true
-region_rect = Rect2(112, 464, 16, 16)
+position = Vector2(1, -4)
+texture = ExtResource("2_adht1")
+region_rect = Rect2(-2, -4, 38, 41)
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -87,18 +196,40 @@ layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -131072, 
 
 [node name="Chimney" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(1.88125, -5.13794)
+position = Vector2(-5, -32)
 scale = Vector2(1.38984, 1.61446)
 sprite_frames = SubResource("SpriteFrames_pbkjw")
 animation = &"SmokeActive"
 autoplay = "SmokeActive"
-frame_progress = 0.427517
+frame_progress = 0.192044
+
+[node name="Chimney2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-10, -14)
+scale = Vector2(0.50742, 0.55723)
+sprite_frames = SubResource("SpriteFrames_pbkjw")
+animation = &"SmokeActive"
+autoplay = "SmokeActive"
+frame_progress = 0.903319
 
 [node name="InActiveWarning" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -18)
 scale = Vector2(0.08525, 0.08525)
 texture = ExtResource("4_sjx87")
+
+[node name="NeedWorkers" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+scale = Vector2(1, 1.2)
+texture = ExtResource("5_rnk8n")
+
+[node name="Destroy" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -10)
+scale = Vector2(1.1199, 1.22222)
+sprite_frames = SubResource("SpriteFrames_0ql7l")
+frame_progress = 0.219269
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

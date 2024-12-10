@@ -14,7 +14,9 @@ var trees: Dictionary
 var active: bool = false
 @onready var tileMap: TileMap = $Tiles
 @onready var chimney: AnimatedSprite2D = $Chimney
+@onready var destroy: AnimatedSprite2D = $Destroy
 @onready var inactive_warning: Sprite2D = $InActiveWarning
+@onready var needworkers_warning: Sprite2D = $NeedWorkers
 
 func _ready() -> void:
 	GlobalSignals.DayEnded.connect(_On_Day_Ended)
@@ -70,5 +72,3 @@ func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		print("Building remove, clicked")
 		emit_signal("building_remove", self)
-
-
